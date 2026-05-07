@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Schemes of Learning — TeacherEase Ghana</title>
+  <meta name="description" content="Basic 8 Third Term Scheme of Learning — BBEKO 2025/2026 Academic Year" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-dark:   #0a3d2e;
+      --green-mid:    #145c42;
+      --green-fresh:  #1e8a5e;
+      --green-light:  #d4ede3;
+      --gold:         #f0b429;
+      --gold-bg:      #fffbeb;
+      --cream:        #fdf8f0;
+      --white:        #ffffff;
+      --text-dark:    #0f1c17;
+      --text-muted:   #5a7168;
+      --border:       rgba(10, 61, 46, 0.08);
+      --sidebar-w:    240px;
+      --radius:       12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      display: flex;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ─── SIDEBAR ─── */
+    .sidebar {
+      width: var(--sidebar-w);
+      background: var(--green-dark);
+      min-height: 100vh;
+      position: fixed;
+      top: 0; left: 0;
+      display: flex;
+      flex-direction: column;
+      padding: 2rem 1.4rem;
+      z-index: 50;
+    }
+
+    .sidebar-logo {
+      font-family: 'Fraunces', serif;
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: var(--white);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .sidebar-logo .dot { width: 7px; height: 7px; background: var(--gold); border-radius: 50%; }
+
+    .sidebar-section-label {
+      font-size: 0.68rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 0.6rem;
+      margin-top: 1.4rem;
+      padding: 0 0.6rem;
+    }
+
+    .sidebar nav { display: flex; flex-direction: column; gap: 0.2rem; flex: 1; }
+
+    .sidebar nav a {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      text-decoration: none;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9rem;
+      font-weight: 400;
+      padding: 0.65rem 0.8rem;
+      border-radius: 8px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .sidebar nav a:hover { background: rgba(255,255,255,0.07); color: var(--white); }
+    .sidebar nav a.active { background: rgba(255,255,255,0.12); color: var(--white); font-weight: 500; }
+
+    .sidebar-footer { margin-top: auto; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.08); }
+
+    .teacher-profile { display: flex; align-items: center; gap: 0.7rem; }
+
+    .avatar {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--green-fresh), var(--gold));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; font-weight: 700; color: var(--white); flex-shrink: 0;
+    }
+
+    .teacher-info .name { font-size: 0.85rem; color: var(--white); font-weight: 500; }
+    .teacher-info .role { font-size: 0.72rem; color: rgba(255,255,255,0.45); }
+
+    /* ─── MAIN ─── */
+    main {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      padding: 2.5rem 2.5rem 5rem;
+      max-width: calc(100vw - var(--sidebar-w));
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ─── TOP BAR ─── */
+    .topbar {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .topbar h1 { font-family: 'Fraunces', serif; font-size: 1.7rem; font-weight: 900; color: var(--green-dark); }
+    .topbar p { font-size: 0.88rem; color: var(--text-muted); margin-top: 0.25rem; }
+
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      border: 1px solid var(--border); background: var(--white);
+      color: var(--text-dark); padding: 0.6rem 1.1rem;
+      border-radius: var(--radius); font-size: 0.88rem; font-weight: 500;
+      cursor: pointer; text-decoration: none; transition: background 0.2s;
+    }
+
+    .btn-outline:hover { background: var(--cream); }
+
+    /* ─── NOTICE BANNER ─── */
+    .notice-banner {
+      background: var(--gold-bg);
+      border: 1px solid rgba(240,180,41,0.35);
+      border-radius: var(--radius);
+      padding: 1rem 1.4rem;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+    }
+
+    .notice-banner .notice-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
+
+    .notice-banner h4 { font-size: 0.88rem; font-weight: 600; color: #7a4e0a; margin-bottom: 0.25rem; }
+    .notice-banner p  { font-size: 0.8rem; color: #92600a; line-height: 1.5; }
+    .notice-banner strong { font-weight: 600; }
+
+    /* ─── FILTER BAR ─── */
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-label { font-size: 0.78rem; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+
+    .filter-btn {
+      padding: 0.4rem 0.9rem;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: var(--white);
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--green-dark);
+      color: var(--white);
+      border-color: var(--green-dark);
+    }
+
+    /* ─── SUBJECT CARDS GRID ─── */
+    .subjects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* ─── SUBJECT CARD ─── */
+    .subject-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .subject-card:hover { box-shadow: 0 12px 32px rgba(10,61,46,0.1); transform: translateY(-2px); }
+
+    .subject-card-head {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 1.2rem 1.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .subject-emoji { font-size: 1.5rem; flex-shrink: 0; }
+
+    .subject-card-head h3 { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 700; color: var(--green-dark); }
+    .subject-card-head p  { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
+
+    .subject-badge {
+      margin-left: auto;
+      font-size: 0.68rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.25rem 0.6rem;
+      border-radius: 100px;
+      background: var(--green-light);
+      color: var(--green-dark);
+      flex-shrink: 0;
+    }
+
+    /* ─── WEEK TABLE ─── */
+    .scheme-table { width: 100%; border-collapse: collapse; }
+
+    .scheme-table thead th {
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--text-muted);
+      padding: 0.6rem 1rem;
+      background: var(--cream);
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .scheme-table tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+
+    .scheme-table tbody tr:last-child { border-bottom: none; }
+    .scheme-table tbody tr:hover { background: #f8f5ee; }
+
+    .scheme-table td {
+      padding: 0.7rem 1rem;
+      font-size: 0.8rem;
+      vertical-align: top;
+      line-height: 1.5;
+      color: var(--text-dark);
+    }
+
+    .week-num {
+      font-family: 'Fraunces', serif;
+      font-weight: 700;
+      color: var(--green-dark);
+      font-size: 0.88rem;
+      white-space: nowrap;
+    }
+
+    .week-special {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-align: center;
+      padding: 0.5rem 1rem;
+      font-style: italic;
+      background: #f5f0e8;
+    }
+
+    .strand-tag {
+      display: inline-block;
+      font-size: 0.66rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      margin-bottom: 0.25rem;
+    }
+
+    .strand-1 { background: #e8f5e9; color: #1b5e20; }
+    .strand-2 { background: #e3f2fd; color: #0d47a1; }
+    .strand-3 { background: #fff3e0; color: #e65100; }
+    .strand-4 { background: #f3e5f5; color: #4a148c; }
+    .strand-5 { background: #fce4ec; color: #880e4f; }
+    .strand-6 { background: #e0f7fa; color: #006064; }
+
+    .indicator-text { color: var(--text-muted); font-size: 0.77rem; margin-top: 0.15rem; }
+
+    /* ─── COLLAPSE TOGGLE ─── */
+    .card-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.7rem 1.2rem;
+      background: var(--cream);
+      border-top: 1px solid var(--border);
+      cursor: pointer;
+      font-size: 0.78rem;
+      color: var(--green-fresh);
+      font-weight: 500;
+      user-select: none;
+      transition: background 0.15s;
+    }
+
+    .card-toggle:hover { background: var(--green-light); }
+    .card-toggle .arrow { transition: transform 0.2s; }
+    .card-toggle.collapsed .arrow { transform: rotate(-90deg); }
+
+    .scheme-body { overflow: hidden; transition: max-height 0.35s ease; }
+    .scheme-body.collapsed { max-height: 0; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      .sidebar { transform: translateX(-100%); }
+      main { margin-left: 0; max-width: 100vw; padding: 1.5rem 1.2rem 4rem; }
+      .subjects-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <a href="index.html" class="sidebar-logo">TeacherEase <span class="dot"></span></a>
+    <nav>
+      <span class="sidebar-section-label">Menu</span>
+      <a href="dashboard.html"><span class="icon">🏠</span> Dashboard</a>
+      <a href="lesson-notes.html"><span class="icon">📝</span> Lesson Notes</a>
+      <a href="schemes.html" class="active"><span class="icon">📅</span> Schemes of Work</a>
+      <span class="sidebar-section-label">Management</span>
+      <a href="admin.html"><span class="icon">⚙️</span> Admin</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="teacher-profile">
+        <div class="avatar">AK</div>
+        <div class="teacher-info">
+          <div class="name">Ama Korsah</div>
+          <div class="role">Class Teacher · JHS 2</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- TOP BAR -->
+    <div class="topbar">
+      <div>
+        <h1>Schemes of Learning</h1>
+        <p>Basic 8 · Third Term · April – July 2026 · BBEKO 2025/2026 Academic Year</p>
+      </div>
+      <a href="dashboard.html" class="btn-outline">← Back to Dashboard</a>
+    </div>
+
+    <!-- NOTICE BANNER -->
+    <div class="notice-banner">
+      <span class="notice-icon">📢</span>
+      <div>
+        <h4>Important Examination Notice — BBEKO</h4>
+        <p>Third Term Examinations: <strong>Monday 13th – Friday 17th July 2026.</strong> &nbsp;|&nbsp; Final registration closes: <strong>Friday, 19th June 2026.</strong> &nbsp;|&nbsp; Full payment required at registration. Examination materials shall not be delivered without full payment.</p>
+      </div>
+    </div>
+
+    <!-- FILTER BAR -->
+    <div class="filter-bar">
+      <span class="filter-label">Filter:</span>
+      <button class="filter-btn active" onclick="filterSubjects('all', this)">All Subjects</button>
+      <button class="filter-btn" onclick="filterSubjects('english', this)">English</button>
+      <button class="filter-btn" onclick="filterSubjects('maths', this)">Mathematics</button>
+      <button class="filter-btn" onclick="filterSubjects('science', this)">Science</button>
+      <button class="filter-btn" onclick="filterSubjects('social', this)">Social Studies</button>
+      <button class="filter-btn" onclick="filterSubjects('other', this)">Other</button>
+    </div>
+
+    <!-- SUBJECTS GRID -->
+    <div class="subjects-grid" id="subjectsGrid">
+
+      <!-- ── ENGLISH LANGUAGE ── -->
+      <div class="subject-card" data-group="english">
+        <div class="subject-card-head">
+          <span class="subject-emoji">📖</span>
+          <div><h3>English Language</h3><p>Weeks 1–12 · 5 Strands</p></div>
+          <span class="subject-badge">10 Wks</span>
+        </div>
+        <div class="scheme-body" id="body-eng">
+          <table class="scheme-table">
+            <thead><tr><th>Week</th><th>Strand / Sub-Strand</th><th>Indicators</th></tr></thead>
+            <tbody>
+              <tr><td class="week-num">1–5</td><td><span class="strand-tag strand-1">Strand 1</span><br>Oral Language<br><small>English Sounds (Plosives)</small></td><td class="indicator-text">B8.1.3.1.1: Produce consonant sounds in context (plosives)</td></tr>
+              <tr><td class="week-num">6–10</td><td><span class="strand-tag strand-1">Strand 1</span><br>Oral Language<br><small>English Sounds (Fricatives)</small></td><td class="indicator-text">B8.1.3.1.2: Produce consonant sounds (fricatives) in context</td></tr>
+              <tr><td class="week-num">1–10</td><td><span class="strand-tag strand-2">Strand 2</span><br>Reading<br><small>Listening Comprehension</small></td><td class="indicator-text">B8.2.2.1.1: Determine the central idea in paragraphs and analyse to identify supporting ideas</td></tr>
+              <tr><td class="week-num">1–5</td><td><span class="strand-tag strand-3">Strand 3</span><br>Grammar<br><small>Punctuation & Capitalisation</small></td><td class="indicator-text">B8.3.2.1.1: Use punctuation marks (colon, semi-colon, apostrophe) in context</td></tr>
+              <tr><td class="week-num">6–10</td><td><span class="strand-tag strand-3">Strand 3</span><br>Grammar<br><small>Vocabulary</small></td><td class="indicator-text">B8.3.3.1.1: Use vocabulary appropriately in speaking and writing</td></tr>
+              <tr><td class="week-num">1–10</td><td><span class="strand-tag strand-4">Strand 4</span><br>Writing<br><small>Building & Presenting Knowledge</small></td><td class="indicator-text">B8.4.3.1.1: Use information from non-text sources (figures, tables, graphs, maps) to support ideas in writing</td></tr>
+              <tr><td class="week-num">1–2</td><td><span class="strand-tag strand-5">Strand 5</span><br>Literature<br><small>Narrative, Drama & Poetry</small></td><td class="indicator-text">B8.5.1.1.4: Use literary devices (euphemism, hyperbole, onomatopoeia) in texts</td></tr>
+              <tr><td class="week-num">3</td><td><span class="strand-tag strand-5">Strand 5</span><br>Literature</td><td class="indicator-text">B8.5.1.1.5: Analyse the sequence of events in film/media, narratives and play scripts — <em>The Beacon of Light</em></td></tr>
+              <tr><td class="week-num">4</td><td><span class="strand-tag strand-5">Strand 5</span><br>Prose Narratives</td><td class="indicator-text">Forest Gold</td></tr>
+              <tr><td class="week-num">5</td><td><span class="strand-tag strand-5">Strand 5</span><br>Prose Narratives</td><td class="indicator-text">A Calabash of Saha</td></tr>
+              <tr><td class="week-num">6–9</td><td><span class="strand-tag strand-5">Strand 5</span><br>Drama</td><td class="indicator-text">Dawuni's Dream — Acts 5, 6, 7, 8</td></tr>
+              <tr><td class="week-num">10</td><td><span class="strand-tag strand-5">Strand 5</span><br>Poetry</td><td class="indicator-text">The Monday Breeze</td></tr>
+              <tr><td colspan="3" class="week-special">Week 11 — Revision &nbsp;|&nbsp; Week 12 — End of Third Term Examinations</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-toggle" onclick="toggleCard('body-eng', this)">
+          <span>Show / Hide Scheme</span><span class="arrow">▼</span>
+        </div>
+      </div>
+
+      <!-- ── MATHEMATICS ── -->
+      <div class="subject-card" data-group="maths">
+        <div class="subject-card-head">
+          <span class="subject-emoji">🔢</span>
+          <div><h3>Mathematics</h3><p>Weeks 1–12 · 4 Strands</p></div>
+          <span class="subject-badge">10 Wks</span>
+        </div>
+        <div class="scheme-body" id="body-maths">
+          <table class="scheme-table">
+            <thead><tr><th>Week</th><th>Strand / Sub-Strand</th><th>Indicators</th></tr></thead>
+            <tbody>
+              <tr><td class="week-num">1–2</td><td><span class="strand-tag strand-1">Strand 1</span><br>Number<br><small>Fractions, Decimals & Percentages</small></td><td class="indicator-text">B8.1.3.1.1–1.3: Review fractions; BODMAS operations; word problems on fractions</td></tr>
+              <tr><td class="week-num">3–4</td><td><span class="strand-tag strand-1">Strand 1</span><br>Number<br><small>Ratios & Proportion</small></td><td class="indicator-text">B8.1.4.1.1–1.2: Ratio reasoning for unit conversion; solve unit rate problems including unit pricing and constant speed</td></tr>
+              <tr><td class="week-num">4–5</td><td><span class="strand-tag strand-1">Strand 1</span><br>Number<br><small>Ratios & Proportion (cont.)</small></td><td class="indicator-text">B8.1.4.1.3–1.4: Travel/distance-time graphs; proportional relationships and straight-line graphs through origin</td></tr>
+              <tr><td class="week-num">6</td><td><span class="strand-tag strand-2">Strand 2</span><br>Algebra<br><small>Variables & Equations</small></td><td class="indicator-text">B8.2.3.1.1: Translate word problems into linear inequalities in one variable and vice versa</td></tr>
+              <tr><td class="week-num">7</td><td><span class="strand-tag strand-2">Strand 2</span><br>Algebra</td><td class="indicator-text">B8.2.3.1.2–1.3: Solve simple linear inequalities; determine solution sets in given domains</td></tr>
+              <tr><td class="week-num">8</td><td><span class="strand-tag strand-3">Strand 3</span><br>Geometry & Measurement<br><small>Position & Transformation</small></td><td class="indicator-text">B8.3.3.1.1–1.3: Rotation — real-life situations; draw rotation image; angle of rotation; congruent shapes</td></tr>
+              <tr><td class="week-num">9</td><td><span class="strand-tag strand-4">Strand 4</span><br>Handling Data<br><small>Chance or Probability</small></td><td class="indicator-text">B8.4.2.1.1: Probability experiment with two independent events; list elements of sample space</td></tr>
+              <tr><td class="week-num">10</td><td><span class="strand-tag strand-4">Strand 4</span><br>Handling Data</td><td class="indicator-text">B8.4.2.1.2: Express probabilities as fractions, decimals, percentages and/or ratios using tree diagrams/tables</td></tr>
+              <tr><td colspan="3" class="week-special">Week 11 — Revision &nbsp;|&nbsp; Week 12 — End of Third Term Examinations</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-toggle" onclick="toggleCard('body-maths', this)">
+          <span>Show / Hide Scheme</span><span class="arrow">▼</span>
+        </div>
+      </div>
+
+      <!-- ── SCIENCE ── -->
+      <div class="subject-card" data-group="science">
+        <div class="subject-card-head">
+          <span class="subject-emoji">🔬</span>
+          <div><h3>Science</h3><p>Weeks 1–12 · 5 Strands</p></div>
+          <span class="subject-badge">10 Wks</span>
+        </div>
+        <div class="scheme-body" id="body-sci">
+          <table class="scheme-table">
+            <thead><tr><th>Week</th><th>Strand / Sub-Strand</th><th>Indicators</th></tr></thead>
+            <tbody>
+              <tr><td class="week-num">1</td><td><span class="strand-tag strand-2">Strand 2</span><br>Life Cycles of Organisms<br><small>Animal Production</small></td><td class="indicator-text">B8.2.4.1.1: Compare and contrast the different types of feed for different types of animals</td></tr>
+              <tr><td class="week-num">2</td><td><span class="strand-tag strand-2">Strand 2</span><br>Animal Production</td><td class="indicator-text">B8.2.4.2.1: Explain the importance of water and animal feed to the growth of animals</td></tr>
+              <tr><td class="week-num">3</td><td><span class="strand-tag strand-3">Strand 3</span><br>Systems<br><small>Farming Systems</small></td><td class="indicator-text">B8.3.4.1.1: Identify and describe types of crops, animals and land combinations for different farming systems</td></tr>
+              <tr><td class="week-num">4</td><td><span class="strand-tag strand-3">Strand 3</span><br>Farming Systems</td><td class="indicator-text">B8.3.4.1.2: Discuss the usefulness of different crops and animals in different farming systems</td></tr>
+              <tr><td class="week-num">5</td><td><span class="strand-tag strand-4">Strand 4</span><br>Forces & Energy<br><small>Agricultural Tools</small></td><td class="indicator-text">B8.4.5.1.1: Show and discuss the use of basic and simple agricultural tools for on-farm activities</td></tr>
+              <tr><td class="week-num">6</td><td><span class="strand-tag strand-4">Strand 4</span><br>Agricultural Tools</td><td class="indicator-text">B8.4.5.1.2: Engage in the use of basic and simple agricultural tools for basic farm activities</td></tr>
+              <tr><td class="week-num">7</td><td><span class="strand-tag strand-5">Strand 5</span><br>Humans & Environment<br><small>Climate Change & Green Economy</small></td><td class="indicator-text">B8.5.4.1.1: Explain the concept of climate change and its effect on the environment</td></tr>
+              <tr><td class="week-num">8</td><td><span class="strand-tag strand-5">Strand 5</span><br>Climate Change</td><td class="indicator-text">B8.5.4.1.2: Describe climate change and green economy actions</td></tr>
+              <tr><td class="week-num">9</td><td><span class="strand-tag strand-5">Strand 5</span><br>Understanding the Environment</td><td class="indicator-text">B8.5.5.1.1–1.2: Discuss & analyse physical properties of soils; soil water content and crop production importance</td></tr>
+              <tr><td class="week-num">10</td><td><span class="strand-tag strand-5">Strand 5</span><br>Understanding the Environment</td><td class="indicator-text">B8.5.6.1.1: Observe and describe different types of rocks as origins of soils</td></tr>
+              <tr><td colspan="3" class="week-special">Week 11 — Revision &nbsp;|&nbsp; Week 12 — End of Third Term Examinations</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-toggle" onclick="toggleCard('body-sci', this)">
+          <span>Show / Hide Scheme</span><span class="arrow">▼</span>
+        </div>
+      </div>
+
+      <!-- ── SOCIAL STUDIES ── -->
+      <div class="subject-card" data-group="social">
+        <div class="subject-card-head">
+          <span class="subject-emoji">🌍</span>
+          <div><h3>Social Studies</h3><p>Weeks 1–12 · 2 Strands</p></div>
+          <span class="subject-badge">10 Wks</span>
+        </div>
+        <div class="scheme-body" id="body-soc">
+          <table class="scheme-table">
+            <thead><tr><th>Week</th><th>Strand / Sub-Strand</th><th>Indicators</th></tr></thead>
+            <tbody>
+              <tr><td class="week-num">1–2</td><td><span class="strand-tag strand-1">Strand 1</span><br>Environment<br><small>Mapping Skills</small></td><td class="indicator-text">B8.1.2.1.1: Sketch maps and interpret landscapes from maps</td></tr>
+              <tr><td class="week-num">3–4</td><td><span class="strand-tag strand-6">Strand 6</span><br>Nationhood<br><small>The Republic</small></td><td class="indicator-text">B8.6.2.1.1: Explain how the First Republic came into being</td></tr>
+              <tr><td class="week-num">5–6</td><td><span class="strand-tag strand-6">Strand 6</span><br>Nationhood</td><td class="indicator-text">B8.6.2.1.2: Explain political developments under the First Republic</td></tr>
+              <tr><td class="week-num">7–8</td><td><span class="strand-tag strand-6">Strand 6</span><br>Nationhood</td><td class="indicator-text">B8.6.2.1.3: Explain how the Second Republic came into being</td></tr>
+              <tr><td class="week-num">9–10</td><td><span class="strand-tag strand-6">Strand 6</span><br>Nationhood</td><td class="indicator-text">B8.6.2.1.4: Explain political developments under the Second Republic</td></tr>
+              <tr><td colspan="3" class="week-special">Week 11 — Revision &nbsp;|&nbsp; Week 12 — End of Third Term Examinations</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-toggle" onclick="toggleCard('body-soc', this)">
+          <span>Show / Hide Scheme</span><span class="arrow">▼</span>
+        </div>
+      </div>
+
+      <!-- ── COMPUTING ── -->
+      <div class="subject-card" data-group="other">
+        <div class="subject-card-head">
+          <span class="subject-emoji">💻</span>
+          <div><h3>Computing (ICT)</h3><p>Weeks 1–12 · 4 Strands</p></div>
+          <span class="subject-badge">10 Wks</span>
+        </div>
+        <div class="scheme-body" id="body-ict">
+          <table class="scheme-table">
+            <thead><tr><th>Week</th><th>Strand / Sub-Strand</th><th>Indicators</th></tr></thead>
+            <tbody>
+              <tr><td class="week-num">1</td><td><span class="strand-tag strand-1">Strand 1</span><br>Intro to Computing<br><small>Health & Safety in ICT</small></td><td class="indicator-text">B8.1.3.1.1–1.2: Discuss health issues at workstations; safety measures in risk reduction</td></tr>
+              <tr><td class="week-num">2</td><td><span class="strand-tag strand-2">Strand 2</span><br>Productivity Software<br><small>Desktop Publishing (MS Publisher)</small></td><td class="indicator-text">B8.2.3.1.1–1.2: Importance of DTP; create and save document from blank/template</td></tr>
+              <tr><td class="week-num">3</td><td><span class="strand-tag strand-2">Strand 2</span><br>MS Publisher</td><td class="indicator-text">B8.2.3.1.3–1.4: Use MS-Publisher ribbon commands; change orientation and margins</td></tr>
+              <tr><td class="week-num">4</td><td><span class="strand-tag strand-2">Strand 2</span><br>MS Publisher</td><td class="indicator-text">B8.2.3.1.5–1.6: Add and modify pictures and text</td></tr>
+              <tr><td class="week-num">5</td><td><span class="strand-tag strand-2">Strand 2</span><br>MS Publisher</td><td class="indicator-text">B9.2.3.1.7: Create and present a Publisher document (flyer, advertisement, invitation cards, business cards)</td></tr>
+              <tr><td class="week-num">6</td><td><span class="strand-tag strand-2">Strand 2</span><br>Electronic Spreadsheet</td><td class="indicator-text">B8.2.4.1.1: Perform operations using functions and built-in functions</td></tr>
+              <tr><td class="week-num">7</td><td><span class="strand-tag strand-2">Strand 2</span><br>Electronic Spreadsheet</td><td class="indicator-text">B8.2.4.1.2–1.3: Create complex formulas; copy formulas and references</td></tr>
+              <tr><td class="week-num">8</td><td><span class="strand-tag strand-3">Strand 3</span><br>Communication Networks<br><small>Web Technologies</small></td><td class="indicator-text">B8.3.4.1.1: Demonstrate how to effectively search from a web browser</td></tr>
+              <tr><td class="week-num">9</td><td><span class="strand-tag strand-3">Strand 3</span><br>Web Technologies</td><td class="indicator-text">B8.3.4.1.2: Explore the use of more than one search engine</td></tr>
+              <tr><td class="week-num">10</td><td><span class="strand-tag strand-4">Strand 4</span><br>Computational Thinking<br><small>Artificial Intelligence</small></td><td class="indicator-text">B8.4.4.1.1: Discuss Artificial Neural Networks (ANN); compare intelligence in humans, animals and machines</td></tr>
+              <tr><td colspan="3" class="week-special">Week 11 — Revision &nbsp;|&nbsp; Week 12 — End of Third Term Examinations</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-toggle" onclick="toggleCard('body-ict', this)">
+          <span>Show / Hide Scheme</span><span class="arrow">▼</span>
+        </div>
+      </div>
+
+      <!-- ── GHANAIAN LANGUAGE ── -->
+      <div class="subject-card" data-group="other">
+        <div class="subject-card-head">
+          <span class="subject-emoji">🇬🇭</span>
+          <div><h3>Ghanaian Language</h3><p>Weeks 1–12 · 4 Strands</p></div>
+          <span class="subject-badge">10 Wks</span>
+        </div>
+        <div class="scheme-body" id="body-ghl">
+          <table class="scheme-table">
+            <thead><tr><th>Week</th><th>Strand / Sub-Strand</th><th>Indicators</th></tr></thead>
+            <tbody>
+              <tr><td class="week-num">1–10</td><td><span class="strand-tag strand-1">Strand 1</span><br>Customs & Institutions<br><small>Chieftaincy: Destoolment</small></td><td class="indicator-text">B8.1.4.1.1–1.2: Examine behaviours leading to destoolment; discuss processes of destoolment/deskinment</td></tr>
+              <tr><td class="week-num">1–10</td><td><span class="strand-tag strand-2">Strand 2</span><br>Listening & Speaking<br><small>Presentation of Everyday Experience</small></td><td class="indicator-text">B8.2.6.1.1: Develop and modify language in narrating selected daily activities</td></tr>
+              <tr><td class="week-num">1–10</td><td><span class="strand-tag strand-3">Strand 3</span><br>Reading<br><small>Translation</small></td><td class="indicator-text">B8.3.2.1.1: Establish the meaning of words, phrases and sentences in various languages</td></tr>
+              <tr><td class="week-num">1–10</td><td><span class="strand-tag strand-4">Strand 4</span><br>Language & Usage<br><small>Grammar: Verbs, Adverbs, Conjunctions</small></td><td class="indicator-text">B8.4.3.1.3: Identify and use conjunctions in an increasing range of texts appropriately and correctly</td></tr>
+              <tr><td colspan="3" class="week-special">Week 11 — Revision &nbsp;|&nbsp; Week 12 — End of Third Term Examinations</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-toggle" onclick="toggleCard('body-ghl', this)">
+          <span>Show / Hide Scheme</span><span class="arrow">▼</span>
+        </div>
+      </div>
+
+      <!-- ── RME ── -->
+      <div class="subject-card" data-group="other">
+        <div class="subject-card-head">
+          <span class="subject-emoji">🕊️</span>
+          <div><h3>Religious & Moral Education</h3><p>Weeks 1–12 · 2 Strands</p></div>
+          <span class="subject-badge">10 Wks</span>
+        </div>
+        <div class="scheme-body" id="body-rme">
+          <table class="scheme-table">
+            <thead><tr><th>Week</th><th>Strand / Sub-Strand</th><th>Indicators</th></tr></thead>
+            <tbody>
+              <tr><td class="week-num">1</td><td><span class="strand-tag strand-5">Strand 5</span><br>Ethics & Moral Life<br><small>Moral Teachings (Three Religions)</small></td><td class="indicator-text">B8.5.1.1.1: Identify and explain moral teachings from the Bible, Qur'an and Oral Traditions</td></tr>
+              <tr><td class="week-num">2</td><td><span class="strand-tag strand-5">Strand 5</span><br>Ethics & Moral Life</td><td class="indicator-text">B8.5.1.1.2: Demonstrate how to apply the moral teachings from the three main religions in daily life</td></tr>
+              <tr><td class="week-num">3</td><td><span class="strand-tag strand-6">Strand 6</span><br>Religion & Economic Life<br><small>Money</small></td><td class="indicator-text">B8.6.1.1.1: Explain the term "money" and indicate its usefulness</td></tr>
+              <tr><td class="week-num">4</td><td><span class="strand-tag strand-6">Strand 6</span><br>Money</td><td class="indicator-text">B8.6.1.1.2: Identify and explain honest ways of acquiring money</td></tr>
+              <tr><td class="week-num">5</td><td><span class="strand-tag strand-6">Strand 6</span><br>Money</td><td class="indicator-text">B8.6.1.1.3: Discuss the appropriate ways of using money</td></tr>
+              <tr><td class="week-num">6–7</td><td><span class="strand-tag strand-6">Strand 6</span><br>Money</td><td class="indicator-text">B8.6.1.1.4: Discuss the benefits of the SSNIT pension scheme and people qualified to benefit</td></tr>
+              <tr><td class="week-num">8–9</td><td><span class="strand-tag strand-6">Strand 6</span><br>Bribery & Corruption</td><td class="indicator-text">B8.6.2.1.1: Explain the terms "bribery" and "corruption"</td></tr>
+              <tr><td class="week-num">10</td><td><span class="strand-tag strand-6">Strand 6</span><br>Bribery & Corruption</td><td class="indicator-text">B8.6.2.1.2: Identify the causes and effects of bribery and corruption</td></tr>
+              <tr><td colspan="3" class="week-special">Week 11 — Revision &nbsp;|&nbsp; Week 12 — End of Third Term Examinations</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-toggle" onclick="toggleCard('body-rme', this)">
+          <span>Show / Hide Scheme</span><span class="arrow">▼</span>
+        </div>
+      </div>
+
+      <!-- ── CAREER TECHNOLOGY ── -->
+      <div class="subject-card" data-group="other">
+        <div class="subject-card-head">
+          <span class="subject-emoji">🔧</span>
+          <div><h3>Career Technology</h3><p>Weeks 1–12 · 5 Strands</p></div>
+          <span class="subject-badge">10 Wks</span>
+        </div>
+        <div class="scheme-body" id="body-ct">
+          <table class="scheme-table">
+            <thead><tr><th>Week</th><th>Strand / Sub-Strand</th><th>Indicators</th></tr></thead>
+            <tbody>
+              <tr><td class="week-num">1–2</td><td><span class="strand-tag strand-1">Strand 1</span><br>Health & Safety<br><small>Environmental Health</small></td><td class="indicator-text">B8.1.3.1.1: Discuss causal factors, effects and prevention of desertification and deforestation</td></tr>
+              <tr><td class="week-num">3</td><td><span class="strand-tag strand-1">Strand 1</span><br>Health & Safety</td><td class="indicator-text">B8.1.3.2.1: Identify proper management and disposal of household and industrial waste</td></tr>
+              <tr><td class="week-num">4</td><td><span class="strand-tag strand-2">Strand 2</span><br>Materials for Production<br><small>Food Commodities</small></td><td class="indicator-text">B8.2.4.1.1: Explore the functions of food to the body</td></tr>
+              <tr><td class="week-num">5</td><td><span class="strand-tag strand-3">Strand 3</span><br>Tools, Equipment & Processes<br><small>Kitchen Essentials</small></td><td class="indicator-text">B8.3.4.1.1: Demonstrate how to care for and maintain kitchen essentials</td></tr>
+              <tr><td class="week-num">6</td><td><span class="strand-tag strand-3">Strand 3</span><br>Finishes & Finishing</td><td class="indicator-text">B8.3.5.1.1: Demonstrate how to mix the various finishes</td></tr>
+              <tr><td class="week-num">7</td><td><span class="strand-tag strand-3">Strand 3</span><br>Finishes & Finishing</td><td class="indicator-text">B8.3.5.1.2: Demonstrate skills of finishing edges of sewing articles and food products</td></tr>
+              <tr><td class="week-num">8</td><td><span class="strand-tag strand-5">Strand 5</span><br>Designing & Making Artefacts<br><small>Compliant/Resistant Materials</small></td><td class="indicator-text">B8.5.4.1.1: Demonstrate skills in table setting</td></tr>
+              <tr><td class="week-num">9</td><td><span class="strand-tag strand-5">Strand 5</span><br>Making Artefacts</td><td class="indicator-text">B8.5.4.1.2: Demonstrate skills in making sewing artefacts/products using seams and arrangement of fullness</td></tr>
+              <tr><td class="week-num">10</td><td><span class="strand-tag strand-5">Strand 5</span><br>Making Artefacts</td><td class="indicator-text">B8.5.4.1.3: Make artefacts/products using wood, metal/plastics</td></tr>
+              <tr><td colspan="3" class="week-special">Week 11 — Revision &nbsp;|&nbsp; Week 12 — End of Third Term Examinations</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-toggle" onclick="toggleCard('body-ct', this)">
+          <span>Show / Hide Scheme</span><span class="arrow">▼</span>
+        </div>
+      </div>
+
+      <!-- ── CREATIVE ARTS & DESIGN ── -->
+      <div class="subject-card" data-group="other">
+        <div class="subject-card-head">
+          <span class="subject-emoji">🎨</span>
+          <div><h3>Creative Arts & Design</h3><p>Weeks 1–12 · 2 Strands</p></div>
+          <span class="subject-badge">10 Wks</span>
+        </div>
+        <div class="scheme-body" id="body-cad">
+          <table class="scheme-table">
+            <thead><tr><th>Week</th><th>Strand / Sub-Strand</th><th>Indicators</th></tr></thead>
+            <tbody>
+              <tr><td class="week-num">1</td><td><span class="strand-tag strand-1">Strand 1</span><br>Design<br><small>Creativity, Innovation & Design Process</small></td><td class="indicator-text">B8.1.3.1.1: Distinguish between creativity and innovation and their application for developing design solutions</td></tr>
+              <tr><td class="week-num">2</td><td><span class="strand-tag strand-1">Strand 1</span><br>Design</td><td class="indicator-text">B8.1.3.1.2: Demonstrate understanding of the design process in relation to creativity and innovations</td></tr>
+              <tr><td class="week-num">3</td><td><span class="strand-tag strand-1">Strand 1</span><br>Design</td><td class="indicator-text">B8.1.3.1.3: Apply the design process to create artefacts that solve specific problems in the local community</td></tr>
+              <tr><td class="week-num">4</td><td><span class="strand-tag strand-2">Strand 2</span><br>Creative Arts<br><small>Visual Arts — Connections in Local & Global Cultures</small></td><td class="indicator-text">B8.2.3.1.1: Identify and discuss visual artists whose work reflected history, culture, environment and topical issues</td></tr>
+              <tr><td class="week-num">5</td><td><span class="strand-tag strand-2">Strand 2</span><br>Visual Arts</td><td class="indicator-text">B8.2.3.1.2: Compare and contrast artworks of visual artists that reflect history, culture, environment and topical issues</td></tr>
+              <tr><td class="week-num">6</td><td><span class="strand-tag strand-2">Strand 2</span><br>Visual Arts</td><td class="indicator-text">B8.2.3.1.3: Determine the creative design approaches and processes used by visual artists</td></tr>
+              <tr><td class="week-num">7</td><td><span class="strand-tag strand-2">Strand 2</span><br>Performing Arts — Music</td><td class="indicator-text">B8.2.3.2.4: Distinguish different ways musical works of Ghanaian art composers reflect history, culture and topical issues</td></tr>
+              <tr><td class="week-num">8</td><td><span class="strand-tag strand-2">Strand 2</span><br>Performing Arts — Music</td><td class="indicator-text">B8.2.3.2.5: Appreciate and appraise at least 3 indigenous and neo-traditional groups based on style, instruments, song themes, dance movements</td></tr>
+              <tr><td class="week-num">9</td><td><span class="strand-tag strand-2">Strand 2</span><br>Dance & Drama</td><td class="indicator-text">B8.2.3.3.6: Select and analyse creative artworks of dance and drama artistes; identify history, culture and topical issues</td></tr>
+              <tr><td class="week-num">10</td><td><span class="strand-tag strand-2">Strand 2</span><br>Dance & Drama</td><td class="indicator-text">B8.2.3.3.7: Organise a group discussion to appreciate dance and/or plays of own and other cultures</td></tr>
+              <tr><td colspan="3" class="week-special">Week 11 — Revision &nbsp;|&nbsp; Week 12 — End of Third Term Examinations</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-toggle" onclick="toggleCard('body-cad', this)">
+          <span>Show / Hide Scheme</span><span class="arrow">▼</span>
+        </div>
+      </div>
+
+      <!-- ── FRENCH ── -->
+      <div class="subject-card" data-group="other">
+        <div class="subject-card-head">
+          <span class="subject-emoji">🇫🇷</span>
+          <div><h3>French</h3><p>Weeks 1–12 · 6 Strands</p></div>
+          <span class="subject-badge">10 Wks</span>
+        </div>
+        <div class="scheme-body" id="body-fr">
+          <table class="scheme-table">
+            <thead><tr><th>Week</th><th>Strand / Sub-Strand</th><th>Indicators</th></tr></thead>
+            <tbody>
+              <tr><td class="week-num">1</td><td><span class="strand-tag strand-1">Strand 1</span><br>Faire Connaissance<br><small>Professions et Métiers</small></td><td class="indicator-text">B8.1.5.1.1–1.2: Écouter & réagir à un texte sur les professions; parler des professions (oral)</td></tr>
+              <tr><td class="week-num">2</td><td><span class="strand-tag strand-1">Strand 1</span><br>Professions et Métiers</td><td class="indicator-text">B8.1.5.1.3–1.4: Lire & comprendre un texte sur les professions; écrire pour parler des professions</td></tr>
+              <tr><td class="week-num">3</td><td><span class="strand-tag strand-1">Strand 1</span><br>Inviter et Accepter/Refuser une Invitation</td><td class="indicator-text">B8.1.8.1.1–1.3: Comprendre & exprimer une invitation; inviter/accepter/refuser; lire et réagir à un texte d'invitation</td></tr>
+              <tr><td class="week-num">4</td><td><span class="strand-tag strand-2">Strand 2</span><br>L'Environnement<br><small>Parler du Temps qu'il fait</small></td><td class="indicator-text">B8.2.4.1.1–1.3: Écouter & réagir à une conversation sur la météo; parler du temps; lire un texte météo</td></tr>
+              <tr><td class="week-num">5</td><td><span class="strand-tag strand-4">Strand 4</span><br>Localisation & Horaires<br><small>Moyens de Transport</small></td><td class="indicator-text">B8.4.5.1.1–1.3: Écouter & commenter les horaires de transport; lire un texte sur le transport</td></tr>
+              <tr><td class="week-num">6</td><td><span class="strand-tag strand-5">Strand 5</span><br>Les Achats<br><small>Faire des Courses</small></td><td class="indicator-text">B8.5.3.1.1–1.2: Écouter une conversation sur les courses; faire des courses (oral)</td></tr>
+              <tr><td class="week-num">7</td><td><span class="strand-tag strand-5">Strand 5</span><br>Faire des Courses</td><td class="indicator-text">B8.5.3.1.3–1.4: Lire un texte sur les courses; décrire une scène de marché/marchander (écrit)</td></tr>
+              <tr><td class="week-num">8</td><td><span class="strand-tag strand-5">Strand 5</span><br>Faire une Réservation</td><td class="indicator-text">B8.5.4.1.1–1.2: Écouter un dialogue sur une réservation; faire une réservation par téléphone</td></tr>
+              <tr><td class="week-num">9</td><td><span class="strand-tag strand-5">Strand 5</span><br>Faire une Réservation</td><td class="indicator-text">B8.5.4.1.3–1.4: Lire une conversation sur une réservation; écrire un texte pour faire une réservation</td></tr>
+              <tr><td class="week-num">10</td><td><span class="strand-tag strand-6">Strand 6</span><br>Les Loisirs<br><small>Parler des Passe-temps</small></td><td class="indicator-text">B8.6.3.1.1–1.4: Écouter, parler, lire et écrire sur les passe-temps (4 compétences)</td></tr>
+              <tr><td colspan="3" class="week-special">Week 11 — Revision &nbsp;|&nbsp; Week 12 — End of Third Term Examinations</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-toggle" onclick="toggleCard('body-fr', this)">
+          <span>Show / Hide Scheme</span><span class="arrow">▼</span>
+        </div>
+      </div>
+
+    </div><!-- /subjects-grid -->
+
+  </main>
+
+  <script>
+    // Toggle card body
+    function toggleCard(bodyId, toggleEl) {
+      const body = document.getElementById(bodyId);
+      body.classList.toggle('collapsed');
+      toggleEl.classList.toggle('collapsed');
+    }
+
+    // Filter subjects
+    function filterSubjects(group, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      document.querySelectorAll('.subject-card').forEach(card => {
+        if (group === 'all' || card.dataset.group === group) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
