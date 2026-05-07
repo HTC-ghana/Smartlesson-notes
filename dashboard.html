@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — TeacherEase Ghana</title>
+  <meta name="description" content="Your TeacherEase Ghana teacher dashboard — track lesson notes, schemes of work, and weekly progress." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-dark:   #0a3d2e;
+      --green-mid:    #145c42;
+      --green-fresh:  #1e8a5e;
+      --green-light:  #d4ede3;
+      --gold:         #f0b429;
+      --gold-light:   #fde68a;
+      --gold-bg:      #fffbeb;
+      --cream:        #fdf8f0;
+      --white:        #ffffff;
+      --text-dark:    #0f1c17;
+      --text-muted:   #5a7168;
+      --border:       rgba(10, 61, 46, 0.08);
+      --sidebar-w:    240px;
+      --radius:       12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      display: flex;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ─── SIDEBAR ─── */
+    .sidebar {
+      width: var(--sidebar-w);
+      background: var(--green-dark);
+      min-height: 100vh;
+      position: fixed;
+      top: 0; left: 0;
+      display: flex;
+      flex-direction: column;
+      padding: 2rem 1.4rem;
+      z-index: 50;
+    }
+
+    .sidebar-logo {
+      font-family: 'Fraunces', serif;
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: var(--white);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .sidebar-logo .dot {
+      width: 7px; height: 7px;
+      background: var(--gold);
+      border-radius: 50%;
+    }
+
+    .sidebar-section-label {
+      font-size: 0.68rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 0.6rem;
+      margin-top: 1.4rem;
+      padding: 0 0.6rem;
+    }
+
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      flex: 1;
+    }
+
+    .sidebar nav a {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      text-decoration: none;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9rem;
+      font-weight: 400;
+      padding: 0.65rem 0.8rem;
+      border-radius: 8px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .sidebar nav a .icon { font-size: 1rem; }
+
+    .sidebar nav a:hover {
+      background: rgba(255,255,255,0.07);
+      color: var(--white);
+    }
+
+    .sidebar nav a.active {
+      background: rgba(255,255,255,0.12);
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .sidebar nav a.active .icon { filter: none; }
+
+    .sidebar-footer {
+      margin-top: auto;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .teacher-profile {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .avatar {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--green-fresh), var(--gold));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--white);
+      flex-shrink: 0;
+    }
+
+    .teacher-info .name {
+      font-size: 0.85rem;
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .teacher-info .role {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* ─── MAIN CONTENT ─── */
+    main {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      padding: 2.5rem 2.5rem 4rem;
+      max-width: calc(100vw - var(--sidebar-w));
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── TOP BAR ─── */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .topbar-left h1 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.7rem;
+      font-weight: 900;
+      color: var(--green-dark);
+    }
+
+    .topbar-left p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .btn-new {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--green-dark);
+      color: var(--white);
+      text-decoration: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: var(--radius);
+      font-size: 0.88rem;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-new:hover {
+      background: var(--green-mid);
+      transform: translateY(-1px);
+    }
+
+    /* ─── STAT CARDS ─── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 1.4rem 1.5rem;
+      border: 1px solid var(--border);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .stat-card:hover {
+      box-shadow: 0 8px 24px rgba(10,61,46,0.08);
+      transform: translateY(-2px);
+    }
+
+    .stat-card .stat-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--text-muted);
+      margin-bottom: 0.6rem;
+    }
+
+    .stat-card .stat-value {
+      font-family: 'Fraunces', serif;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--green-dark);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .stat-card .stat-change {
+      font-size: 0.78rem;
+      color: var(--green-fresh);
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+    }
+
+    .stat-card .stat-icon {
+      font-size: 1.4rem;
+      margin-bottom: 0.8rem;
+    }
+
+    /* ─── GRID LAYOUT ─── */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 1.5rem;
+    }
+
+    .left-col { display: flex; flex-direction: column; gap: 1.5rem; }
+    .right-col { display: flex; flex-direction: column; gap: 1.5rem; }
+
+    /* ─── CARD BASE ─── */
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.3rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .card-head h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--green-dark);
+    }
+
+    .card-head a, .view-all {
+      font-size: 0.8rem;
+      color: var(--green-fresh);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .card-head a:hover { text-decoration: underline; }
+
+    /* ─── WEEKLY PROGRESS ─── */
+    .week-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0.5rem;
+      padding: 1.5rem;
+      align-items: end;
+    }
+
+    .day-col { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+
+    .day-bar-wrap {
+      width: 100%;
+      height: 80px;
+      background: #f0ebe0;
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .day-bar {
+      width: 100%;
+      background: linear-gradient(180deg, var(--green-fresh), var(--green-dark));
+      border-radius: 6px;
+      transition: height 0.6s ease;
+    }
+
+    .day-bar.gold { background: linear-gradient(180deg, var(--gold), #c98b00); }
+    .day-bar.empty { background: transparent; }
+
+    .day-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .day-count {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--green-dark);
+    }
+
+    /* ─── SAVED NOTES TABLE ─── */
+    .notes-list { padding: 0.5rem 0; }
+
+    .note-row {
+      display: flex;
+      align-items: center;
+      padding: 0.85rem 1.5rem;
+      gap: 1rem;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .note-row:last-child { border-bottom: none; }
+    .note-row:hover { background: var(--cream); }
+
+    .note-icon {
+      width: 36px; height: 36px;
+      background: var(--green-light);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .note-info { flex: 1; min-width: 0; }
+
+    .note-title {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-dark);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .note-meta {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .note-badge {
+      font-size: 0.7rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 100px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .badge-done     { background: var(--green-light); color: var(--green-dark); }
+    .badge-draft    { background: var(--gold-bg); color: #92600a; }
+    .badge-progress { background: #e0f0ff; color: #1a5fa8; }
+
+    /* ─── SUBJECTS ─── */
+    .subjects-list { padding: 1rem 1.5rem; display: flex; flex-direction: column; gap: 0.9rem; }
+
+    .subject-row { display: flex; flex-direction: column; gap: 0.35rem; }
+
+    .subject-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .subject-name { font-size: 0.88rem; font-weight: 500; color: var(--text-dark); }
+    .subject-pct  { font-size: 0.78rem; color: var(--text-muted); }
+
+    .bar-wrap {
+      height: 6px;
+      background: #eee8db;
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 100px;
+      background: linear-gradient(90deg, var(--green-fresh), var(--gold));
+    }
+
+    /* ─── UPCOMING ─── */
+    .upcoming-list { padding: 0.5rem 0; }
+
+    .upcoming-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+      padding: 0.9rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .upcoming-item:last-child { border-bottom: none; }
+
+    .upcoming-date {
+      background: var(--green-dark);
+      color: var(--white);
+      border-radius: 8px;
+      padding: 0.4rem 0.6rem;
+      text-align: center;
+      flex-shrink: 0;
+      min-width: 40px;
+    }
+
+    .upcoming-date .day-num {
+      font-family: 'Fraunces', serif;
+      font-size: 1.1rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .upcoming-date .month-short {
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      opacity: 0.7;
+      margin-top: 1px;
+    }
+
+    .upcoming-info .ev-title {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-dark);
+    }
+
+    .upcoming-info .ev-sub {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* ─── QUICK ACTIONS ─── */
+    .quick-actions {
+      padding: 1rem 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8rem;
+    }
+
+    .qa-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.3rem;
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.9rem 1rem;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      cursor: pointer;
+    }
+
+    .qa-btn:hover {
+      background: var(--green-light);
+      transform: translateY(-2px);
+    }
+
+    .qa-icon  { font-size: 1.2rem; }
+    .qa-label { font-size: 0.82rem; font-weight: 500; color: var(--text-dark); }
+
+    /* ─── MOBILE ─── */
+    @media (max-width: 900px) {
+      .sidebar { transform: translateX(-100%); }
+      main { margin-left: 0; max-width: 100vw; padding: 1.5rem; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .dashboard-grid { grid-template-columns: 1fr; }
+      .week-grid { grid-template-columns: repeat(7, 1fr); gap: 0.3rem; }
+    }
+
+    @media (max-width: 480px) {
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .quick-actions { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <a href="index.html" class="sidebar-logo">
+      TeacherEase <span class="dot"></span>
+    </a>
+
+    <nav>
+      <span class="sidebar-section-label">Menu</span>
+      <a href="dashboard.html" class="active"><span class="icon">🏠</span> Dashboard</a>
+      <a href="lesson-notes.html"><span class="icon">📝</span> Lesson Notes</a>
+      <a href="schemes.html"><span class="icon">📅</span> Schemes of Work</a>
+
+      <span class="sidebar-section-label">Management</span>
+      <a href="admin.html"><span class="icon">⚙️</span> Admin</a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="teacher-profile">
+        <div class="avatar">AK</div>
+        <div class="teacher-info">
+          <div class="name">Ama Korsah</div>
+          <div class="role">Class Teacher · JHS 2</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- TOP BAR -->
+    <div class="topbar">
+      <div class="topbar-left">
+        <h1>Good morning, Ama 👋</h1>
+        <p>Thursday, 8 May 2026 · Term 2, Week 7</p>
+      </div>
+      <div class="topbar-right">
+        <a href="lesson-notes.html" class="btn-new">+ New Lesson Note</a>
+      </div>
+    </div>
+
+    <!-- STAT CARDS -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-icon">📝</div>
+        <div class="stat-label">Lesson Notes</div>
+        <div class="stat-value">24</div>
+        <div class="stat-change">↑ 3 this week</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📅</div>
+        <div class="stat-label">Schemes Done</div>
+        <div class="stat-value">6</div>
+        <div class="stat-change">↑ 1 this term</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📚</div>
+        <div class="stat-label">Subjects</div>
+        <div class="stat-value">5</div>
+        <div class="stat-change">All active</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">⏱️</div>
+        <div class="stat-label">Hours Saved</div>
+        <div class="stat-value">18</div>
+        <div class="stat-change">↑ 4 this week</div>
+      </div>
+    </div>
+
+    <!-- MAIN GRID -->
+    <div class="dashboard-grid">
+
+      <!-- LEFT COLUMN -->
+      <div class="left-col">
+
+        <!-- Weekly Progress -->
+        <div class="card">
+          <div class="card-head">
+            <h3>Weekly Progress</h3>
+            <a href="#">View Details</a>
+          </div>
+          <div class="week-grid">
+            <div class="day-col">
+              <div class="day-bar-wrap"><div class="day-bar" style="height:55%"></div></div>
+              <div class="day-label">Mon</div>
+              <div class="day-count">2</div>
+            </div>
+            <div class="day-col">
+              <div class="day-bar-wrap"><div class="day-bar" style="height:80%"></div></div>
+              <div class="day-label">Tue</div>
+              <div class="day-count">3</div>
+            </div>
+            <div class="day-col">
+              <div class="day-bar-wrap"><div class="day-bar" style="height:40%"></div></div>
+              <div class="day-label">Wed</div>
+              <div class="day-count">1</div>
+            </div>
+            <div class="day-col">
+              <div class="day-bar-wrap"><div class="day-bar gold" style="height:100%"></div></div>
+              <div class="day-label">Thu</div>
+              <div class="day-count">4</div>
+            </div>
+            <div class="day-col">
+              <div class="day-bar-wrap"><div class="day-bar empty" style="height:0%"></div></div>
+              <div class="day-label">Fri</div>
+              <div class="day-count">—</div>
+            </div>
+            <div class="day-col">
+              <div class="day-bar-wrap"><div class="day-bar empty" style="height:0%"></div></div>
+              <div class="day-label">Sat</div>
+              <div class="day-count">—</div>
+            </div>
+            <div class="day-col">
+              <div class="day-bar-wrap"><div class="day-bar empty" style="height:0%"></div></div>
+              <div class="day-label">Sun</div>
+              <div class="day-count">—</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Saved Notes -->
+        <div class="card">
+          <div class="card-head">
+            <h3>Recent Lesson Notes</h3>
+            <a href="lesson-notes.html">View All</a>
+          </div>
+          <div class="notes-list">
+            <a href="lesson-notes.html" class="note-row">
+              <div class="note-icon">📋</div>
+              <div class="note-info">
+                <div class="note-title">Properties of Matter</div>
+                <div class="note-meta">Basic Science · JHS 2 · Week 7</div>
+              </div>
+              <span class="note-badge badge-done">Done</span>
+            </a>
+            <a href="lesson-notes.html" class="note-row">
+              <div class="note-icon">📋</div>
+              <div class="note-info">
+                <div class="note-title">Linear Equations — Introduction</div>
+                <div class="note-meta">Mathematics · JHS 2 · Week 7</div>
+              </div>
+              <span class="note-badge badge-progress">In Progress</span>
+            </a>
+            <a href="lesson-notes.html" class="note-row">
+              <div class="note-icon">📋</div>
+              <div class="note-info">
+                <div class="note-title">Ghana's Independence Movement</div>
+                <div class="note-meta">Social Studies · JHS 2 · Week 6</div>
+              </div>
+              <span class="note-badge badge-done">Done</span>
+            </a>
+            <a href="lesson-notes.html" class="note-row">
+              <div class="note-icon">📋</div>
+              <div class="note-info">
+                <div class="note-title">Reading Comprehension — Folktales</div>
+                <div class="note-meta">English · JHS 2 · Week 6</div>
+              </div>
+              <span class="note-badge badge-draft">Draft</span>
+            </a>
+            <a href="lesson-notes.html" class="note-row">
+              <div class="note-icon">📋</div>
+              <div class="note-info">
+                <div class="note-title">Healthy Eating Habits</div>
+                <div class="note-meta">Physical Education · JHS 2 · Week 5</div>
+              </div>
+              <span class="note-badge badge-done">Done</span>
+            </a>
+          </div>
+        </div>
+
+      </div><!-- /left-col -->
+
+      <!-- RIGHT COLUMN -->
+      <div class="right-col">
+
+        <!-- Quick Actions -->
+        <div class="card">
+          <div class="card-head"><h3>Quick Actions</h3></div>
+          <div class="quick-actions">
+            <a href="lesson-notes.html" class="qa-btn">
+              <span class="qa-icon">📝</span>
+              <span class="qa-label">New Lesson Note</span>
+            </a>
+            <a href="schemes.html" class="qa-btn">
+              <span class="qa-icon">📅</span>
+              <span class="qa-label">New Scheme</span>
+            </a>
+            <a href="lesson-notes.html" class="qa-btn">
+              <span class="qa-icon">📂</span>
+              <span class="qa-label">Browse Notes</span>
+            </a>
+            <a href="admin.html" class="qa-btn">
+              <span class="qa-icon">⚙️</span>
+              <span class="qa-label">Settings</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Subjects -->
+        <div class="card">
+          <div class="card-head">
+            <h3>Subjects</h3>
+            <a href="schemes.html">Manage</a>
+          </div>
+          <div class="subjects-list">
+            <div class="subject-row">
+              <div class="subject-top">
+                <span class="subject-name">Basic Science</span>
+                <span class="subject-pct">85%</span>
+              </div>
+              <div class="bar-wrap"><div class="bar-fill" style="width:85%"></div></div>
+            </div>
+            <div class="subject-row">
+              <div class="subject-top">
+                <span class="subject-name">Mathematics</span>
+                <span class="subject-pct">60%</span>
+              </div>
+              <div class="bar-wrap"><div class="bar-fill" style="width:60%"></div></div>
+            </div>
+            <div class="subject-row">
+              <div class="subject-top">
+                <span class="subject-name">Social Studies</span>
+                <span class="subject-pct">70%</span>
+              </div>
+              <div class="bar-wrap"><div class="bar-fill" style="width:70%"></div></div>
+            </div>
+            <div class="subject-row">
+              <div class="subject-top">
+                <span class="subject-name">English Language</span>
+                <span class="subject-pct">45%</span>
+              </div>
+              <div class="bar-wrap"><div class="bar-fill" style="width:45%"></div></div>
+            </div>
+            <div class="subject-row">
+              <div class="subject-top">
+                <span class="subject-name">Physical Education</span>
+                <span class="subject-pct">90%</span>
+              </div>
+              <div class="bar-wrap"><div class="bar-fill" style="width:90%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Upcoming -->
+        <div class="card">
+          <div class="card-head">
+            <h3>Upcoming Deadlines</h3>
+          </div>
+          <div class="upcoming-list">
+            <div class="upcoming-item">
+              <div class="upcoming-date">
+                <div class="day-num">09</div>
+                <div class="month-short">May</div>
+              </div>
+              <div class="upcoming-info">
+                <div class="ev-title">Submit Maths Scheme — Week 8</div>
+                <div class="ev-sub">Head of Department review</div>
+              </div>
+            </div>
+            <div class="upcoming-item">
+              <div class="upcoming-date">
+                <div class="day-num">12</div>
+                <div class="month-short">May</div>
+              </div>
+              <div class="upcoming-info">
+                <div class="ev-title">End of Term Assessment</div>
+                <div class="ev-sub">Basic Science · JHS 2</div>
+              </div>
+            </div>
+            <div class="upcoming-item">
+              <div class="upcoming-date">
+                <div class="day-num">16</div>
+                <div class="month-short">May</div>
+              </div>
+              <div class="upcoming-info">
+                <div class="ev-title">Parent–Teacher Conference</div>
+                <div class="ev-sub">All subjects — summary notes due</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /right-col -->
+
+    </div><!-- /dashboard-grid -->
+
+  </main>
+
+</body>
+</html>
