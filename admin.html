@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Portal — TeacherEase Ghana</title>
+  <meta name="description" content="TeacherEase Ghana Admin Portal — manage teachers, upload curriculum, and view analytics." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-dark:   #0a3d2e;
+      --green-mid:    #145c42;
+      --green-fresh:  #1e8a5e;
+      --green-light:  #d4ede3;
+      --gold:         #f0b429;
+      --gold-bg:      #fffbeb;
+      --gold-light:   #fde68a;
+      --cream:        #fdf8f0;
+      --white:        #ffffff;
+      --text-dark:    #0f1c17;
+      --text-muted:   #5a7168;
+      --border:       rgba(10, 61, 46, 0.08);
+      --red-bg:       #fff1f0;
+      --red:          #c0392b;
+      --blue-bg:      #e8f4ff;
+      --blue:         #1a5fa8;
+      --sidebar-w:    240px;
+      --radius:       12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      display: flex;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ─── SIDEBAR ─── */
+    .sidebar {
+      width: var(--sidebar-w);
+      background: var(--green-dark);
+      min-height: 100vh;
+      position: fixed;
+      top: 0; left: 0;
+      display: flex;
+      flex-direction: column;
+      padding: 2rem 1.4rem;
+      z-index: 50;
+    }
+
+    .sidebar-logo {
+      font-family: 'Fraunces', serif;
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: var(--white);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .sidebar-logo .dot { width: 7px; height: 7px; background: var(--gold); border-radius: 50%; }
+
+    .sidebar-section-label {
+      font-size: 0.68rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 0.6rem;
+      margin-top: 1.4rem;
+      padding: 0 0.6rem;
+    }
+
+    .sidebar nav { display: flex; flex-direction: column; gap: 0.2rem; flex: 1; }
+
+    .sidebar nav a {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      text-decoration: none;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9rem;
+      font-weight: 400;
+      padding: 0.65rem 0.8rem;
+      border-radius: 8px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .sidebar nav a:hover { background: rgba(255,255,255,0.07); color: var(--white); }
+    .sidebar nav a.active { background: rgba(255,255,255,0.12); color: var(--white); font-weight: 500; }
+
+    .sidebar-footer { margin-top: auto; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.08); }
+    .teacher-profile { display: flex; align-items: center; gap: 0.7rem; }
+
+    .avatar {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--green-fresh), var(--gold));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; font-weight: 700; color: var(--white); flex-shrink: 0;
+    }
+
+    .teacher-info .name { font-size: 0.85rem; color: var(--white); font-weight: 500; }
+    .teacher-info .role { font-size: 0.72rem; color: rgba(255,255,255,0.45); }
+
+    /* ─── MAIN ─── */
+    main {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      padding: 2.5rem 2.5rem 5rem;
+      max-width: calc(100vw - var(--sidebar-w));
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ─── TOP BAR ─── */
+    .topbar {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .topbar h1 { font-family: 'Fraunces', serif; font-size: 1.7rem; font-weight: 900; color: var(--green-dark); }
+    .topbar p { font-size: 0.88rem; color: var(--text-muted); margin-top: 0.25rem; }
+
+    .admin-badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: var(--red-bg); color: var(--red);
+      font-size: 0.72rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      padding: 0.3rem 0.8rem; border-radius: 100px;
+      border: 1px solid rgba(192,57,43,0.2);
+      margin-bottom: 0.4rem;
+    }
+
+    /* ─── STAT CARDS ─── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 1.4rem 1.5rem;
+      border: 1px solid var(--border);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .stat-card:hover { box-shadow: 0 8px 24px rgba(10,61,46,0.08); transform: translateY(-2px); }
+    .stat-card .stat-icon { font-size: 1.4rem; margin-bottom: 0.8rem; }
+    .stat-card .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-muted); margin-bottom: 0.5rem; }
+    .stat-card .stat-value { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 900; color: var(--green-dark); line-height: 1; margin-bottom: 0.4rem; }
+    .stat-card .stat-change { font-size: 0.78rem; color: var(--green-fresh); }
+
+    /* ─── SECTION TITLE ─── */
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .section-head h2 { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 700; color: var(--green-dark); }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: var(--green-dark); color: var(--white);
+      padding: 0.55rem 1.1rem; border-radius: var(--radius);
+      font-size: 0.85rem; font-weight: 500; border: none; cursor: pointer;
+      text-decoration: none; transition: background 0.2s, transform 0.15s;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .btn-primary:hover { background: var(--green-mid); transform: translateY(-1px); }
+
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      border: 1px solid var(--border); background: var(--white);
+      color: var(--text-dark); padding: 0.55rem 1rem;
+      border-radius: var(--radius); font-size: 0.85rem; font-weight: 500;
+      cursor: pointer; text-decoration: none; transition: background 0.2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .btn-outline:hover { background: var(--cream); }
+
+    .btn-danger {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      border: 1px solid rgba(192,57,43,0.2); background: var(--red-bg);
+      color: var(--red); padding: 0.4rem 0.8rem;
+      border-radius: 8px; font-size: 0.78rem; font-weight: 500;
+      cursor: pointer; transition: background 0.2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .btn-danger:hover { background: #fde8e6; }
+
+    /* ─── DASHBOARD GRID ─── */
+    .admin-grid {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .left-col { display: flex; flex-direction: column; gap: 1.5rem; }
+    .right-col { display: flex; flex-direction: column; gap: 1.5rem; }
+
+    /* ─── CARD BASE ─── */
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .card-head h3 { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 600; color: var(--green-dark); }
+
+    /* ─── TEACHERS TABLE ─── */
+    .teachers-table { width: 100%; border-collapse: collapse; }
+
+    .teachers-table thead th {
+      font-size: 0.68rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.07em;
+      color: var(--text-muted); padding: 0.7rem 1.2rem;
+      background: var(--cream); text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .teachers-table tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+
+    .teachers-table tbody tr:last-child { border-bottom: none; }
+    .teachers-table tbody tr:hover { background: #f8f5ee; }
+
+    .teachers-table td {
+      padding: 0.85rem 1.2rem;
+      font-size: 0.85rem;
+      vertical-align: middle;
+    }
+
+    .teacher-name-cell { display: flex; align-items: center; gap: 0.7rem; }
+
+    .t-avatar {
+      width: 30px; height: 30px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; font-weight: 700; color: var(--white); flex-shrink: 0;
+    }
+
+    .av-green { background: linear-gradient(135deg, var(--green-fresh), var(--green-dark)); }
+    .av-gold  { background: linear-gradient(135deg, var(--gold), #c98b00); }
+    .av-blue  { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+    .av-red   { background: linear-gradient(135deg, #f87171, #dc2626); }
+    .av-teal  { background: linear-gradient(135deg, #2dd4bf, #0d9488); }
+
+    .t-name  { font-weight: 500; font-size: 0.88rem; color: var(--text-dark); }
+    .t-class { font-size: 0.75rem; color: var(--text-muted); }
+
+    .status-badge {
+      font-size: 0.7rem; font-weight: 600;
+      padding: 0.2rem 0.6rem; border-radius: 100px;
+    }
+
+    .status-active   { background: var(--green-light); color: var(--green-dark); }
+    .status-inactive { background: #f5f0e8; color: var(--text-muted); }
+    .status-pending  { background: var(--gold-bg); color: #92600a; }
+
+    .action-btns { display: flex; gap: 0.4rem; }
+
+    .icon-btn {
+      width: 28px; height: 28px; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid var(--border); background: var(--cream);
+      cursor: pointer; font-size: 0.8rem;
+      transition: background 0.15s; color: var(--text-muted);
+    }
+
+    .icon-btn:hover { background: var(--green-light); }
+
+    /* ─── CURRICULUM UPLOAD ─── */
+    .upload-zone {
+      margin: 1.2rem;
+      border: 2px dashed rgba(10,61,46,0.15);
+      border-radius: var(--radius);
+      padding: 2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .upload-zone:hover { border-color: var(--green-fresh); background: rgba(30,138,94,0.03); }
+
+    .upload-icon { font-size: 2rem; margin-bottom: 0.6rem; }
+    .upload-zone h4 { font-size: 0.9rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.3rem; }
+    .upload-zone p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+
+    .upload-files { padding: 0 1.2rem 1.2rem; display: flex; flex-direction: column; gap: 0.6rem; }
+
+    .upload-file-row {
+      display: flex; align-items: center; gap: 0.7rem;
+      background: var(--cream); border-radius: 8px;
+      padding: 0.65rem 0.9rem; border: 1px solid var(--border);
+    }
+
+    .file-icon  { font-size: 1rem; flex-shrink: 0; }
+    .file-name  { flex: 1; font-size: 0.82rem; font-weight: 500; color: var(--text-dark); }
+    .file-meta  { font-size: 0.72rem; color: var(--text-muted); }
+    .file-check { font-size: 0.9rem; }
+
+    /* ─── ANALYTICS CARD ─── */
+    .analytics-list { padding: 0.5rem 0; }
+
+    .analytics-row {
+      display: flex; align-items: center;
+      padding: 0.85rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      gap: 1rem;
+    }
+
+    .analytics-row:last-child { border-bottom: none; }
+
+    .analytics-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+
+    .ai-green { background: var(--green-light); }
+    .ai-gold  { background: var(--gold-bg); }
+    .ai-blue  { background: var(--blue-bg); }
+
+    .analytics-info { flex: 1; }
+    .analytics-label { font-size: 0.85rem; font-weight: 500; color: var(--text-dark); }
+    .analytics-sub   { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
+
+    .analytics-val {
+      font-family: 'Fraunces', serif;
+      font-size: 1.3rem; font-weight: 900; color: var(--green-dark);
+    }
+
+    /* ─── ACTIVITY FEED ─── */
+    .activity-feed { padding: 0.5rem 0; }
+
+    .activity-item {
+      display: flex; gap: 0.8rem;
+      padding: 0.85rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      align-items: flex-start;
+    }
+
+    .activity-item:last-child { border-bottom: none; }
+
+    .activity-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      margin-top: 5px; flex-shrink: 0;
+    }
+
+    .dot-green { background: var(--green-fresh); }
+    .dot-gold  { background: var(--gold); }
+    .dot-blue  { background: var(--blue); }
+    .dot-red   { background: var(--red); }
+
+    .activity-text { font-size: 0.82rem; color: var(--text-dark); line-height: 1.5; }
+    .activity-time { font-size: 0.72rem; color: var(--text-muted); margin-top: 2px; }
+
+    /* ─── SETTINGS CARD ─── */
+    .settings-list { padding: 0.5rem 0; }
+
+    .settings-row {
+      display: flex; align-items: center;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      gap: 1rem;
+    }
+
+    .settings-row:last-child { border-bottom: none; }
+
+    .settings-icon { font-size: 1.2rem; flex-shrink: 0; }
+    .settings-info { flex: 1; }
+    .settings-label { font-size: 0.88rem; font-weight: 500; color: var(--text-dark); }
+    .settings-sub   { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
+
+    /* Toggle switch */
+    .toggle-wrap { flex-shrink: 0; }
+
+    .toggle {
+      position: relative;
+      display: inline-block;
+      width: 40px; height: 22px;
+    }
+
+    .toggle input { opacity: 0; width: 0; height: 0; }
+
+    .toggle-slider {
+      position: absolute; inset: 0;
+      background: #ddd; border-radius: 100px; cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .toggle-slider::before {
+      content: '';
+      position: absolute;
+      height: 16px; width: 16px;
+      left: 3px; bottom: 3px;
+      background: var(--white); border-radius: 50%;
+      transition: transform 0.2s;
+    }
+
+    .toggle input:checked + .toggle-slider { background: var(--green-fresh); }
+    .toggle input:checked + .toggle-slider::before { transform: translateX(18px); }
+
+    /* ─── SEARCH BAR ─── */
+    .search-wrap {
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+
+    .search-input {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      padding: 0.5rem 0.9rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--cream);
+      color: var(--text-dark);
+      outline: none;
+      width: 180px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .search-input:focus { border-color: var(--green-fresh); background: var(--white); }
+    .search-input::placeholder { color: #b0bdb8; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 960px) {
+      .admin-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .sidebar { transform: translateX(-100%); }
+      main { margin-left: 0; max-width: 100vw; padding: 1.5rem 1.2rem 4rem; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ─── TOAST ─── */
+    .toast {
+      position: fixed; bottom: 2rem; right: 2rem;
+      background: var(--green-dark); color: var(--white);
+      padding: 0.8rem 1.4rem; border-radius: var(--radius);
+      font-size: 0.88rem; font-weight: 500;
+      display: flex; align-items: center; gap: 0.5rem;
+      box-shadow: 0 8px 24px rgba(10,61,46,0.25);
+      transform: translateY(80px); opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      z-index: 200;
+    }
+
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    /* ─── MODAL ─── */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(10,30,20,0.5);
+      z-index: 100;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.2s;
+    }
+
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+    .modal {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 2rem;
+      width: 90%; max-width: 440px;
+      transform: scale(0.95);
+      transition: transform 0.2s;
+    }
+
+    .modal-overlay.open .modal { transform: scale(1); }
+
+    .modal h3 { font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 900; color: var(--green-dark); margin-bottom: 0.4rem; }
+    .modal p  { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.4rem; line-height: 1.6; }
+
+    .modal-form { display: flex; flex-direction: column; gap: 0.9rem; margin-bottom: 1.5rem; }
+
+    .modal-form label { font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; display: block; }
+
+    .modal-form input,
+    .modal-form select {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      padding: 0.65rem 0.9rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--cream);
+      color: var(--text-dark);
+      width: 100%; outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .modal-form input:focus,
+    .modal-form select:focus { border-color: var(--green-fresh); }
+
+    .modal-actions { display: flex; gap: 0.8rem; justify-content: flex-end; }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <a href="index.html" class="sidebar-logo">TeacherEase <span class="dot"></span></a>
+    <nav>
+      <span class="sidebar-section-label">Menu</span>
+      <a href="dashboard.html"><span class="icon">🏠</span> Dashboard</a>
+      <a href="lesson-notes.html"><span class="icon">📝</span> Lesson Notes</a>
+      <a href="schemes.html"><span class="icon">📅</span> Schemes of Work</a>
+      <span class="sidebar-section-label">Management</span>
+      <a href="admin.html" class="active"><span class="icon">⚙️</span> Admin</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="teacher-profile">
+        <div class="avatar">AK</div>
+        <div class="teacher-info">
+          <div class="name">Ama Korsah</div>
+          <div class="role">Administrator</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- TOP BAR -->
+    <div class="topbar">
+      <div>
+        <div class="admin-badge">🔐 Admin Access</div>
+        <h1>Admin Portal</h1>
+        <p>Manage teachers, curriculum files, settings and view school analytics.</p>
+      </div>
+      <a href="dashboard.html" class="btn-outline">← Back to Dashboard</a>
+    </div>
+
+    <!-- STAT CARDS -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-icon">👩‍🏫</div>
+        <div class="stat-label">Total Teachers</div>
+        <div class="stat-value">24</div>
+        <div class="stat-change">↑ 2 this term</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📋</div>
+        <div class="stat-label">Lesson Notes</div>
+        <div class="stat-value">312</div>
+        <div class="stat-change">↑ 47 this week</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📁</div>
+        <div class="stat-label">Curriculum Files</div>
+        <div class="stat-value">18</div>
+        <div class="stat-change">3 recently added</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">⏱️</div>
+        <div class="stat-label">Hours Saved</div>
+        <div class="stat-value">640</div>
+        <div class="stat-change">↑ Across all staff</div>
+      </div>
+    </div>
+
+    <!-- MAIN GRID -->
+    <div class="admin-grid">
+
+      <!-- LEFT COLUMN -->
+      <div class="left-col">
+
+        <!-- Manage Teachers -->
+        <div class="card">
+          <div class="card-head">
+            <h3>👩‍🏫 Manage Teachers</h3>
+            <div style="display:flex;gap:0.6rem;align-items:center;">
+              <input class="search-input" type="text" placeholder="Search teachers…" />
+              <button class="btn-primary" onclick="openModal()">+ Add Teacher</button>
+            </div>
+          </div>
+          <table class="teachers-table">
+            <thead>
+              <tr>
+                <th>Teacher</th>
+                <th>Subject(s)</th>
+                <th>Class</th>
+                <th>Status</th>
+                <th>Notes</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="teacher-name-cell"><div class="t-avatar av-green">AK</div><div><div class="t-name">Ama Korsah</div><div class="t-class">Head of Department</div></div></div></td>
+                <td>Basic Science, Maths</td>
+                <td>JHS 2</td>
+                <td><span class="status-badge status-active">Active</span></td>
+                <td>24</td>
+                <td><div class="action-btns"><button class="icon-btn" title="Edit">✏️</button><button class="icon-btn" title="View">👁️</button></div></td>
+              </tr>
+              <tr>
+                <td><div class="teacher-name-cell"><div class="t-avatar av-gold">KA</div><div><div class="t-name">Kwame Asante</div><div class="t-class">Class Teacher</div></div></div></td>
+                <td>English Language</td>
+                <td>JHS 1</td>
+                <td><span class="status-badge status-active">Active</span></td>
+                <td>19</td>
+                <td><div class="action-btns"><button class="icon-btn">✏️</button><button class="icon-btn">👁️</button></div></td>
+              </tr>
+              <tr>
+                <td><div class="teacher-name-cell"><div class="t-avatar av-blue">BM</div><div><div class="t-name">Beatrice Mensah</div><div class="t-class">Class Teacher</div></div></div></td>
+                <td>Social Studies, RME</td>
+                <td>Primary 6</td>
+                <td><span class="status-badge status-active">Active</span></td>
+                <td>31</td>
+                <td><div class="action-btns"><button class="icon-btn">✏️</button><button class="icon-btn">👁️</button></div></td>
+              </tr>
+              <tr>
+                <td><div class="teacher-name-cell"><div class="t-avatar av-teal">EO</div><div><div class="t-name">Emmanuel Osei</div><div class="t-class">Class Teacher</div></div></div></td>
+                <td>Mathematics, ICT</td>
+                <td>JHS 3</td>
+                <td><span class="status-badge status-pending">Pending</span></td>
+                <td>7</td>
+                <td><div class="action-btns"><button class="icon-btn">✏️</button><button class="icon-btn">👁️</button></div></td>
+              </tr>
+              <tr>
+                <td><div class="teacher-name-cell"><div class="t-avatar av-red">SA</div><div><div class="t-name">Sandra Acheampong</div><div class="t-class">Subject Teacher</div></div></div></td>
+                <td>French, Creative Arts</td>
+                <td>JHS 2, JHS 3</td>
+                <td><span class="status-badge status-inactive">Inactive</span></td>
+                <td>12</td>
+                <td><div class="action-btns"><button class="icon-btn">✏️</button><button class="icon-btn">👁️</button></div></td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="padding:0.8rem 1.2rem;background:var(--cream);border-top:1px solid var(--border);font-size:0.78rem;color:var(--text-muted);display:flex;justify-content:space-between;">
+            <span>Showing 5 of 24 teachers</span>
+            <div style="display:flex;gap:0.5rem;">
+              <button class="btn-outline" style="padding:0.3rem 0.7rem;font-size:0.78rem;">← Prev</button>
+              <button class="btn-outline" style="padding:0.3rem 0.7rem;font-size:0.78rem;">Next →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Upload Curriculum -->
+        <div class="card">
+          <div class="card-head">
+            <h3>📁 Upload Curriculum</h3>
+            <button class="btn-outline" onclick="showToast('📁 All files downloaded!')">⬇️ Download All</button>
+          </div>
+
+          <div class="upload-zone" onclick="showToast('📂 File picker opened!')">
+            <div class="upload-icon">☁️</div>
+            <h4>Drop files here or click to upload</h4>
+            <p>Supports PDF, DOCX, XLSX — NaCCA curriculum documents,<br>scheme templates, and lesson note resources.</p>
+          </div>
+
+          <div class="upload-files">
+            <div class="upload-file-row">
+              <span class="file-icon">📄</span>
+              <span class="file-name">BASIC_8_SCHEME_3RD_TERM.pdf</span>
+              <span class="file-meta">2.1 MB · May 2026</span>
+              <span class="file-check">✅</span>
+            </div>
+            <div class="upload-file-row">
+              <span class="file-icon">📄</span>
+              <span class="file-name">NaCCA_Curriculum_JHS_2025.pdf</span>
+              <span class="file-meta">5.4 MB · Jan 2026</span>
+              <span class="file-check">✅</span>
+            </div>
+            <div class="upload-file-row">
+              <span class="file-icon">📊</span>
+              <span class="file-name">Term2_Lesson_Templates.xlsx</span>
+              <span class="file-meta">850 KB · Mar 2026</span>
+              <span class="file-check">✅</span>
+            </div>
+            <div class="upload-file-row">
+              <span class="file-icon">📝</span>
+              <span class="file-name">Performance_Indicators_B8.docx</span>
+              <span class="file-meta">320 KB · Apr 2026</span>
+              <span class="file-check">✅</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /left-col -->
+
+      <!-- RIGHT COLUMN -->
+      <div class="right-col">
+
+        <!-- Analytics -->
+        <div class="card">
+          <div class="card-head"><h3>📊 Analytics</h3></div>
+          <div class="analytics-list">
+            <div class="analytics-row">
+              <div class="analytics-icon ai-green">📝</div>
+              <div class="analytics-info">
+                <div class="analytics-label">Notes This Term</div>
+                <div class="analytics-sub">Across all teachers & subjects</div>
+              </div>
+              <div class="analytics-val">312</div>
+            </div>
+            <div class="analytics-row">
+              <div class="analytics-icon ai-gold">✅</div>
+              <div class="analytics-info">
+                <div class="analytics-label">Completion Rate</div>
+                <div class="analytics-sub">Lessons marked done</div>
+              </div>
+              <div class="analytics-val">78%</div>
+            </div>
+            <div class="analytics-row">
+              <div class="analytics-icon ai-blue">⏱️</div>
+              <div class="analytics-info">
+                <div class="analytics-label">Avg. Prep Time</div>
+                <div class="analytics-sub">Per lesson note (down from 45min)</div>
+              </div>
+              <div class="analytics-val">14m</div>
+            </div>
+            <div class="analytics-row">
+              <div class="analytics-icon ai-green">👩‍🏫</div>
+              <div class="analytics-info">
+                <div class="analytics-label">Active Teachers</div>
+                <div class="analytics-sub">Logged in this week</div>
+              </div>
+              <div class="analytics-val">21</div>
+            </div>
+            <div class="analytics-row">
+              <div class="analytics-icon ai-gold">📅</div>
+              <div class="analytics-info">
+                <div class="analytics-label">Schemes Submitted</div>
+                <div class="analytics-sub">This term</div>
+              </div>
+              <div class="analytics-val">62</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Settings -->
+        <div class="card">
+          <div class="card-head"><h3>⚙️ Settings</h3></div>
+          <div class="settings-list">
+            <div class="settings-row">
+              <span class="settings-icon">🔔</span>
+              <div class="settings-info">
+                <div class="settings-label">Email Notifications</div>
+                <div class="settings-sub">Notify on new lesson note submissions</div>
+              </div>
+              <div class="toggle-wrap">
+                <label class="toggle"><input type="checkbox" checked /><span class="toggle-slider"></span></label>
+              </div>
+            </div>
+            <div class="settings-row">
+              <span class="settings-icon">🔒</span>
+              <div class="settings-info">
+                <div class="settings-label">Require Approval</div>
+                <div class="settings-sub">Admin must approve new teacher accounts</div>
+              </div>
+              <div class="toggle-wrap">
+                <label class="toggle"><input type="checkbox" checked /><span class="toggle-slider"></span></label>
+              </div>
+            </div>
+            <div class="settings-row">
+              <span class="settings-icon">📥</span>
+              <div class="settings-info">
+                <div class="settings-label">Auto-Save Drafts</div>
+                <div class="settings-sub">Save in-progress notes every 5 mins</div>
+              </div>
+              <div class="toggle-wrap">
+                <label class="toggle"><input type="checkbox" checked /><span class="toggle-slider"></span></label>
+              </div>
+            </div>
+            <div class="settings-row">
+              <span class="settings-icon">🌙</span>
+              <div class="settings-info">
+                <div class="settings-label">Maintenance Mode</div>
+                <div class="settings-sub">Disable access for non-admins</div>
+              </div>
+              <div class="toggle-wrap">
+                <label class="toggle"><input type="checkbox" /><span class="toggle-slider"></span></label>
+              </div>
+            </div>
+            <div class="settings-row" style="padding-bottom:1.2rem;">
+              <span class="settings-icon">🗑️</span>
+              <div class="settings-info">
+                <div class="settings-label">Clear All Draft Notes</div>
+                <div class="settings-sub">Permanently remove unsaved drafts</div>
+              </div>
+              <button class="btn-danger" onclick="showToast('🗑️ Drafts cleared!')">Clear</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Activity Feed -->
+        <div class="card">
+          <div class="card-head"><h3>🕐 Recent Activity</h3></div>
+          <div class="activity-feed">
+            <div class="activity-item">
+              <div class="activity-dot dot-green"></div>
+              <div><div class="activity-text"><strong>Ama Korsah</strong> saved a lesson note — Basic Science, Week 7</div><div class="activity-time">2 mins ago</div></div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot dot-gold"></div>
+              <div><div class="activity-text"><strong>Kwame Asante</strong> submitted a scheme of work — English, Term 3</div><div class="activity-time">18 mins ago</div></div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot dot-blue"></div>
+              <div><div class="activity-text"><strong>Emmanuel Osei</strong> created a new account — pending approval</div><div class="activity-time">1 hour ago</div></div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot dot-green"></div>
+              <div><div class="activity-text"><strong>Beatrice Mensah</strong> uploaded a curriculum file</div><div class="activity-time">3 hours ago</div></div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot dot-red"></div>
+              <div><div class="activity-text"><strong>Sandra Acheampong</strong> account marked inactive by admin</div><div class="activity-time">Yesterday</div></div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /right-col -->
+
+    </div><!-- /admin-grid -->
+
+  </main>
+
+  <!-- ADD TEACHER MODAL -->
+  <div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
+    <div class="modal">
+      <h3>Add New Teacher</h3>
+      <p>Fill in the details below to create a new teacher account. They will receive an email invite to set their password.</p>
+      <div class="modal-form">
+        <div>
+          <label>Full Name <span style="color:var(--gold)">*</span></label>
+          <input type="text" placeholder="e.g. Abena Owusu" />
+        </div>
+        <div>
+          <label>Email Address <span style="color:var(--gold)">*</span></label>
+          <input type="text" placeholder="e.g. a.owusu@school.edu.gh" />
+        </div>
+        <div>
+          <label>Subject(s)</label>
+          <input type="text" placeholder="e.g. Mathematics, ICT" />
+        </div>
+        <div>
+          <label>Class</label>
+          <select>
+            <option value="" disabled selected>Select class…</option>
+            <option>Primary 1</option><option>Primary 2</option><option>Primary 3</option>
+            <option>Primary 4</option><option>Primary 5</option><option>Primary 6</option>
+            <option>JHS 1</option><option>JHS 2</option><option>JHS 3</option>
+          </select>
+        </div>
+        <div>
+          <label>Role</label>
+          <select>
+            <option>Class Teacher</option>
+            <option>Subject Teacher</option>
+            <option>Head of Department</option>
+            <option>Administrator</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-outline" onclick="closeModal()">Cancel</button>
+        <button class="btn-primary" onclick="addTeacher()">✅ Add Teacher</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">✅ Done!</div>
+
+  <script>
+    function openModal()  { document.getElementById('modal').classList.add('open'); }
+    function closeModal() { document.getElementById('modal').classList.remove('open'); }
+    function closeModalOutside(e) { if (e.target === document.getElementById('modal')) closeModal(); }
+
+    function addTeacher() {
+      closeModal();
+      showToast('👩‍🏫 Teacher account created & invite sent!');
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 3000);
+    }
+  </script>
+
+</body>
+</html>
