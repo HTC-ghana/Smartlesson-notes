@@ -39,7 +39,6 @@
       overflow-x: hidden;
     }
 
-    /* ─── SIDEBAR ─── */
     .sidebar {
       width: var(--sidebar-w);
       background: var(--green-dark);
@@ -66,11 +65,7 @@
       border-bottom: 1px solid rgba(255,255,255,0.1);
     }
 
-    .sidebar-logo .dot {
-      width: 7px; height: 7px;
-      background: var(--gold);
-      border-radius: 50%;
-    }
+    .sidebar-logo .dot { width: 7px; height: 7px; background: var(--gold); border-radius: 50%; }
 
     .sidebar-section-label {
       font-size: 0.68rem;
@@ -83,12 +78,7 @@
       padding: 0 0.6rem;
     }
 
-    .sidebar nav {
-      display: flex;
-      flex-direction: column;
-      gap: 0.2rem;
-      flex: 1;
-    }
+    .sidebar nav { display: flex; flex-direction: column; gap: 0.2rem; flex: 1; }
 
     .sidebar nav a {
       display: flex;
@@ -104,17 +94,8 @@
     }
 
     .sidebar nav a .icon { font-size: 1rem; }
-
-    .sidebar nav a:hover {
-      background: rgba(255,255,255,0.07);
-      color: var(--white);
-    }
-
-    .sidebar nav a.active {
-      background: rgba(255,255,255,0.12);
-      color: var(--white);
-      font-weight: 500;
-    }
+    .sidebar nav a:hover { background: rgba(255,255,255,0.07); color: var(--white); }
+    .sidebar nav a.active { background: rgba(255,255,255,0.12); color: var(--white); font-weight: 500; }
 
     .sidebar-footer {
       margin-top: auto;
@@ -122,29 +103,30 @@
       border-top: 1px solid rgba(255,255,255,0.08);
     }
 
-    .teacher-profile {
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-    }
+    .teacher-profile { display: flex; align-items: center; gap: 0.7rem; }
 
     .avatar {
       width: 34px; height: 34px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--green-fresh), var(--gold));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--white);
-      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; font-weight: 700; color: var(--white); flex-shrink: 0;
     }
 
     .teacher-info .name { font-size: 0.85rem; color: var(--white); font-weight: 500; }
     .teacher-info .role { font-size: 0.72rem; color: rgba(255,255,255,0.45); }
 
-    /* ─── MAIN ─── */
+    /* logout button */
+    .btn-logout {
+      display: flex; align-items: center; gap: 0.5rem;
+      background: none; border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.6); font-size: 0.8rem;
+      padding: 0.5rem 0.8rem; border-radius: 8px;
+      cursor: pointer; margin-top: 0.8rem; width: 100%;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-logout:hover { background: rgba(255,255,255,0.08); color: var(--white); }
+
     main {
       margin-left: var(--sidebar-w);
       flex: 1;
@@ -153,400 +135,175 @@
       animation: fadeIn 0.4s ease;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* ─── TOP BAR ─── */
     .topbar {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      margin-bottom: 2.5rem;
-      flex-wrap: wrap;
-      gap: 1rem;
+      display: flex; align-items: flex-start; justify-content: space-between;
+      margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem;
     }
 
-    .topbar h1 {
-      font-family: 'Fraunces', serif;
-      font-size: 1.7rem;
-      font-weight: 900;
-      color: var(--green-dark);
-    }
+    .topbar h1 { font-family: 'Fraunces', serif; font-size: 1.7rem; font-weight: 900; color: var(--green-dark); }
+    .topbar p { font-size: 0.88rem; color: var(--text-muted); margin-top: 0.25rem; }
 
-    .topbar p {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      margin-top: 0.25rem;
-    }
-
-    .topbar-actions {
-      display: flex;
-      gap: 0.8rem;
-      align-items: center;
-      flex-wrap: wrap;
-    }
+    .topbar-actions { display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap; }
 
     .btn-outline {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      border: 1px solid var(--border);
-      background: var(--white);
-      color: var(--text-dark);
-      padding: 0.6rem 1.1rem;
-      border-radius: var(--radius);
-      font-size: 0.88rem;
-      font-weight: 500;
-      cursor: pointer;
-      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      border: 1px solid var(--border); background: var(--white);
+      color: var(--text-dark); padding: 0.6rem 1.1rem; border-radius: var(--radius);
+      font-size: 0.88rem; font-weight: 500; cursor: pointer; text-decoration: none;
       transition: background 0.2s;
     }
-
     .btn-outline:hover { background: var(--cream); }
 
     .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: var(--green-dark);
-      color: var(--white);
-      padding: 0.6rem 1.3rem;
-      border-radius: var(--radius);
-      font-size: 0.88rem;
-      font-weight: 500;
-      border: none;
-      cursor: pointer;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: var(--green-dark); color: var(--white);
+      padding: 0.6rem 1.3rem; border-radius: var(--radius);
+      font-size: 0.88rem; font-weight: 500; border: none; cursor: pointer;
       transition: background 0.2s, transform 0.15s;
     }
+    .btn-primary:hover { background: var(--green-mid); transform: translateY(-1px); }
+    .btn-primary:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
 
-    .btn-primary:hover {
-      background: var(--green-mid);
-      transform: translateY(-1px);
-    }
-
-    /* ─── PROGRESS STEPS ─── */
     .steps-bar {
-      display: flex;
-      align-items: center;
-      gap: 0;
+      display: flex; align-items: center;
       margin-bottom: 2.5rem;
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1rem 1.5rem;
-      overflow-x: auto;
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1rem 1.5rem; overflow-x: auto;
     }
 
-    .step {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      flex-shrink: 0;
-    }
+    .step { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
 
     .step-num {
-      width: 26px; height: 26px;
-      border-radius: 50%;
+      width: 26px; height: 26px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 0.75rem;
-      font-weight: 700;
-      background: #eee8db;
-      color: var(--text-muted);
-      flex-shrink: 0;
+      font-size: 0.75rem; font-weight: 700;
+      background: #eee8db; color: var(--text-muted); flex-shrink: 0;
     }
 
     .step.done .step-num  { background: var(--green-fresh); color: var(--white); }
     .step.active .step-num { background: var(--green-dark); color: var(--white); }
 
-    .step-label {
-      font-size: 0.82rem;
-      font-weight: 500;
-      color: var(--text-muted);
-      white-space: nowrap;
-    }
-
+    .step-label { font-size: 0.82rem; font-weight: 500; color: var(--text-muted); white-space: nowrap; }
     .step.active .step-label { color: var(--green-dark); }
     .step.done .step-label   { color: var(--green-fresh); }
 
-    .step-divider {
-      flex: 1;
-      min-width: 20px;
-      height: 1px;
-      background: var(--border);
-      margin: 0 0.5rem;
-    }
+    .step-divider { flex: 1; min-width: 20px; height: 1px; background: var(--border); margin: 0 0.5rem; }
 
-    /* ─── FORM LAYOUT ─── */
-    .form-layout {
-      display: grid;
-      grid-template-columns: 1fr 300px;
-      gap: 1.5rem;
-      align-items: start;
-    }
+    .form-layout { display: grid; grid-template-columns: 1fr 300px; gap: 1.5rem; align-items: start; }
 
-    /* ─── FORM CARD ─── */
-    .form-card {
-      background: var(--white);
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      overflow: hidden;
-    }
+    .form-card { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; }
 
-    .form-section {
-      padding: 1.8rem;
-      border-bottom: 1px solid var(--border);
-    }
-
+    .form-section { padding: 1.8rem; border-bottom: 1px solid var(--border); }
     .form-section:last-child { border-bottom: none; }
 
-    .section-title {
-      font-family: 'Fraunces', serif;
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--green-dark);
-      margin-bottom: 0.3rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
+    .section-title { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 600; color: var(--green-dark); margin-bottom: 0.3rem; display: flex; align-items: center; gap: 0.5rem; }
+    .section-desc { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.4rem; }
 
-    .section-desc {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-bottom: 1.4rem;
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-      margin-bottom: 1rem;
-    }
-
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
     .form-row.three { grid-template-columns: 1fr 1fr 1fr; }
     .form-row.full  { grid-template-columns: 1fr; }
 
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-    }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
 
-    label {
-      font-size: 0.78rem;
-      font-weight: 500;
-      color: var(--text-dark);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
+    label { font-size: 0.78rem; font-weight: 500; color: var(--text-dark); text-transform: uppercase; letter-spacing: 0.05em; }
     label .req { color: var(--gold); margin-left: 2px; }
 
-    input[type="text"],
-    input[type="date"],
-    select,
-    textarea {
+    input[type="text"], input[type="date"], select, textarea {
       font-family: 'DM Sans', sans-serif;
-      font-size: 0.9rem;
-      color: var(--text-dark);
-      background: var(--cream);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 0.65rem 0.9rem;
-      width: 100%;
-      outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
-      resize: none;
+      font-size: 0.9rem; color: var(--text-dark);
+      background: var(--cream); border: 1px solid var(--border);
+      border-radius: 8px; padding: 0.65rem 0.9rem;
+      width: 100%; outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s; resize: none;
     }
 
-    input[type="text"]:focus,
-    input[type="date"]:focus,
-    select:focus,
-    textarea:focus {
+    input[type="text"]:focus, input[type="date"]:focus, select:focus, textarea:focus {
       border-color: var(--green-fresh);
       box-shadow: 0 0 0 3px rgba(30,138,94,0.1);
       background: var(--white);
     }
 
     input::placeholder, textarea::placeholder { color: #b0bdb8; }
-
     select { appearance: none; cursor: pointer; }
-
     textarea { line-height: 1.6; }
 
-    /* Phase boxes */
-    .phase-box {
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      margin-bottom: 1rem;
-    }
-
+    .phase-box { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 1rem; }
     .phase-box:last-child { margin-bottom: 0; }
 
-    .phase-header {
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-      padding: 0.75rem 1rem;
-      background: var(--cream);
-      border-bottom: 1px solid var(--border);
-    }
+    .phase-header { display: flex; align-items: center; gap: 0.7rem; padding: 0.75rem 1rem; background: var(--cream); border-bottom: 1px solid var(--border); }
 
-    .phase-tag {
-      font-size: 0.7rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      padding: 0.2rem 0.6rem;
-      border-radius: 100px;
-    }
-
+    .phase-tag { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 0.2rem 0.6rem; border-radius: 100px; }
     .phase-tag.starter { background: var(--gold-bg); color: #92600a; }
     .phase-tag.main    { background: var(--green-light); color: var(--green-dark); }
     .phase-tag.plenary { background: #e0edff; color: #1a4fa8; }
 
-    .phase-title {
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--text-dark);
-    }
-
-    .phase-time {
-      margin-left: auto;
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
+    .phase-title { font-size: 0.85rem; font-weight: 500; color: var(--text-dark); }
+    .phase-time { margin-left: auto; font-size: 0.75rem; color: var(--text-muted); }
 
     .phase-body { padding: 1rem; }
+    .phase-body textarea { background: var(--white); border: 1px solid var(--border); min-height: 100px; }
 
-    .phase-body textarea {
-      background: var(--white);
-      border: 1px solid var(--border);
-      min-height: 100px;
-    }
+    .side-panel { display: flex; flex-direction: column; gap: 1.2rem; }
 
-    /* ─── SIDEBAR PANEL ─── */
-    .side-panel {
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-    }
-
-    .panel-card {
-      background: var(--white);
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      overflow: hidden;
-    }
-
-    .panel-head {
-      padding: 1rem 1.2rem;
-      border-bottom: 1px solid var(--border);
-      font-family: 'Fraunces', serif;
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--green-dark);
-    }
-
+    .panel-card { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; }
+    .panel-head { padding: 1rem 1.2rem; border-bottom: 1px solid var(--border); font-family: 'Fraunces', serif; font-size: 0.9rem; font-weight: 600; color: var(--green-dark); }
     .panel-body { padding: 1.2rem; }
 
-    /* completeness meter */
-    .completeness-value {
-      font-family: 'Fraunces', serif;
-      font-size: 2.2rem;
-      font-weight: 900;
-      color: var(--green-dark);
-      line-height: 1;
-      margin-bottom: 0.4rem;
-    }
+    .completeness-value { font-family: 'Fraunces', serif; font-size: 2.2rem; font-weight: 900; color: var(--green-dark); line-height: 1; margin-bottom: 0.4rem; }
+    .completeness-label { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.9rem; }
 
-    .completeness-label {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      margin-bottom: 0.9rem;
-    }
-
-    .c-bar-wrap {
-      height: 8px;
-      background: #eee8db;
-      border-radius: 100px;
-      overflow: hidden;
-      margin-bottom: 1rem;
-    }
-
-    .c-bar-fill {
-      height: 100%;
-      width: 30%;
-      background: linear-gradient(90deg, var(--green-fresh), var(--gold));
-      border-radius: 100px;
-      transition: width 0.5s ease;
-    }
+    .c-bar-wrap { height: 8px; background: #eee8db; border-radius: 100px; overflow: hidden; margin-bottom: 1rem; }
+    .c-bar-fill { height: 100%; width: 30%; background: linear-gradient(90deg, var(--green-fresh), var(--gold)); border-radius: 100px; transition: width 0.5s ease; }
 
     .checklist { display: flex; flex-direction: column; gap: 0.5rem; }
-
-    .check-item {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
+    .check-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--text-muted); }
     .check-item .check-icon { font-size: 0.85rem; }
     .check-item.done { color: var(--green-fresh); }
 
-    /* tips */
-    .tip-item {
-      display: flex;
-      gap: 0.6rem;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-      padding-bottom: 0.8rem;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 0.8rem;
-    }
-
+    .tip-item { display: flex; gap: 0.6rem; font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; padding-bottom: 0.8rem; border-bottom: 1px solid var(--border); margin-bottom: 0.8rem; }
     .tip-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
     .tip-icon { font-size: 0.95rem; flex-shrink: 0; margin-top: 1px; }
 
-    /* save actions at bottom */
-    .form-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 0.8rem;
-      padding: 1.4rem 1.8rem;
-      border-top: 1px solid var(--border);
-      background: var(--cream);
-    }
+    .form-actions { display: flex; justify-content: flex-end; gap: 0.8rem; padding: 1.4rem 1.8rem; border-top: 1px solid var(--border); background: var(--cream); }
 
     /* ─── TOAST ─── */
     .toast {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      background: var(--green-dark);
-      color: var(--white);
-      padding: 0.8rem 1.4rem;
-      border-radius: var(--radius);
-      font-size: 0.88rem;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      position: fixed; bottom: 2rem; right: 2rem;
+      background: var(--green-dark); color: var(--white);
+      padding: 0.8rem 1.4rem; border-radius: var(--radius);
+      font-size: 0.88rem; font-weight: 500;
+      display: flex; align-items: center; gap: 0.5rem;
       box-shadow: 0 8px 24px rgba(10,61,46,0.25);
-      transform: translateY(80px);
-      opacity: 0;
+      transform: translateY(80px); opacity: 0;
       transition: transform 0.3s ease, opacity 0.3s ease;
       z-index: 200;
     }
-
     .toast.show { transform: translateY(0); opacity: 1; }
+    .toast.error-toast { background: #c0392b; }
 
-    /* ─── RESPONSIVE ─── */
+    /* ─── SUBMIT OVERLAY ─── */
+    .submit-overlay {
+      position: fixed; inset: 0;
+      background: rgba(10,61,46,0.7);
+      display: none; align-items: center; justify-content: center;
+      z-index: 300; backdrop-filter: blur(4px);
+    }
+    .submit-overlay.show { display: flex; }
+    .submit-box {
+      background: var(--white); border-radius: 20px;
+      padding: 2.5rem; max-width: 420px; width: 90%;
+      text-align: center;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.3);
+      animation: fadeUp 0.3s ease;
+    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .submit-icon { font-size: 3rem; margin-bottom: 1rem; }
+    .submit-box h3 { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 900; color: var(--green-dark); margin-bottom: 0.5rem; }
+    .submit-box p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1.5rem; }
+    .submit-box .btn-primary { width: 100%; justify-content: center; padding: 0.8rem; }
+
     @media (max-width: 960px) {
       .form-layout { grid-template-columns: 1fr; }
       .side-panel { display: grid; grid-template-columns: 1fr 1fr; }
@@ -580,66 +337,48 @@
     </nav>
     <div class="sidebar-footer">
       <div class="teacher-profile">
-        <div class="avatar">AK</div>
+        <div class="avatar" id="teacherAvatar">T</div>
         <div class="teacher-info">
-          <div class="name">Isaac Sackey</div>
-          <div class="role">Class Teacher · JHS 2</div>
+          <div class="name" id="teacherName">Teacher</div>
+          <div class="role" id="teacherEmail"></div>
         </div>
       </div>
+      <button class="btn-logout" id="logoutBtn">🚪 Sign out</button>
     </div>
   </aside>
 
   <!-- MAIN -->
   <main>
 
-    <!-- TOP BAR -->
     <div class="topbar">
       <div>
         <h1>Lesson Note Builder</h1>
-        <p>NaCCA-aligned structured lesson plan — JHS 2</p>
+        <p>NaCCA-aligned structured lesson plan</p>
       </div>
       <div class="topbar-actions">
         <a href="dashboard.html" class="btn-outline">← Back to Dashboard</a>
         <button class="btn-outline" onclick="saveDraft()">💾 Save Draft</button>
-        <button class="btn-primary" onclick="saveNote()">✅ Save Lesson Note</button>
+        <button class="btn-primary" id="submitBtn" onclick="submitNote()">✅ Submit Lesson Note</button>
       </div>
     </div>
 
-    <!-- PROGRESS STEPS -->
     <div class="steps-bar">
-      <div class="step done">
-        <div class="step-num">✓</div>
-        <div class="step-label">Details</div>
-      </div>
+      <div class="step done"><div class="step-num">✓</div><div class="step-label">Details</div></div>
       <div class="step-divider"></div>
-      <div class="step active">
-        <div class="step-num">2</div>
-        <div class="step-label">Standards</div>
-      </div>
+      <div class="step active"><div class="step-num">2</div><div class="step-label">Standards</div></div>
       <div class="step-divider"></div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-label">Lesson Phases</div>
-      </div>
+      <div class="step"><div class="step-num">3</div><div class="step-label">Lesson Phases</div></div>
       <div class="step-divider"></div>
-      <div class="step">
-        <div class="step-num">4</div>
-        <div class="step-label">Resources</div>
-      </div>
+      <div class="step"><div class="step-num">4</div><div class="step-label">Resources</div></div>
       <div class="step-divider"></div>
-      <div class="step">
-        <div class="step-num">5</div>
-        <div class="step-label">Review</div>
-      </div>
+      <div class="step"><div class="step-num">5</div><div class="step-label">Review</div></div>
     </div>
 
-    <!-- FORM LAYOUT -->
     <div class="form-layout">
 
-      <!-- FORM CARD -->
       <div class="form-card">
 
-        <!-- Section 1: Basic Info -->
+        <!-- Section 1 -->
         <div class="form-section">
           <div class="section-title">📋 Lesson Details</div>
           <div class="section-desc">Basic information about this lesson note.</div>
@@ -662,15 +401,9 @@
               <label>Class <span class="req">*</span></label>
               <select id="class" onchange="updateCompleteness()">
                 <option value="" disabled selected>Select class…</option>
-                <option>Primary 1</option>
-                <option>Primary 2</option>
-                <option>Primary 3</option>
-                <option>Primary 4</option>
-                <option>Primary 5</option>
-                <option>Primary 6</option>
-                <option>JHS 1</option>
-                <option>JHS 2</option>
-                <option>JHS 3</option>
+                <option>Primary 1</option><option>Primary 2</option><option>Primary 3</option>
+                <option>Primary 4</option><option>Primary 5</option><option>Primary 6</option>
+                <option>JHS 1</option><option>JHS 2</option><option>JHS 3</option>
               </select>
             </div>
           </div>
@@ -678,16 +411,14 @@
           <div class="form-row three">
             <div class="form-group">
               <label>Term</label>
-              <select>
+              <select id="term">
                 <option value="" disabled selected>Term…</option>
-                <option>Term 1</option>
-                <option>Term 2</option>
-                <option>Term 3</option>
+                <option>Term 1</option><option>Term 2</option><option>Term 3</option>
               </select>
             </div>
             <div class="form-group">
               <label>Week</label>
-              <select>
+              <select id="week">
                 <option value="" disabled selected>Week…</option>
                 <option>Week 1</option><option>Week 2</option><option>Week 3</option>
                 <option>Week 4</option><option>Week 5</option><option>Week 6</option>
@@ -697,14 +428,14 @@
             </div>
             <div class="form-group">
               <label>Week Ending</label>
-              <input type="date" />
+              <input type="date" id="weekEnding" />
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group">
               <label>Duration (minutes)</label>
-              <select>
+              <select id="duration">
                 <option>40 minutes</option>
                 <option>60 minutes</option>
                 <option>80 minutes</option>
@@ -712,60 +443,54 @@
             </div>
             <div class="form-group">
               <label>Number of Learners</label>
-              <input type="text" placeholder="e.g. 35" />
+              <input type="text" id="learners" placeholder="e.g. 35" />
             </div>
           </div>
         </div>
 
-        <!-- Section 2: Curriculum -->
+        <!-- Section 2 -->
         <div class="form-section">
           <div class="section-title">📚 Curriculum Strands</div>
           <div class="section-desc">NaCCA curriculum strand and sub-strand for this lesson.</div>
-
           <div class="form-row full">
             <div class="form-group">
               <label>Strand <span class="req">*</span></label>
               <input type="text" id="strand" placeholder="e.g. Matter" oninput="updateCompleteness()" />
             </div>
           </div>
-
           <div class="form-row full">
             <div class="form-group">
               <label>Sub-Strand <span class="req">*</span></label>
               <input type="text" id="substrand" placeholder="e.g. Properties and Classification of Matter" oninput="updateCompleteness()" />
             </div>
           </div>
-
           <div class="form-row full">
             <div class="form-group">
               <label>Topic / Title</label>
-              <input type="text" placeholder="e.g. States of Matter" />
+              <input type="text" id="topic" placeholder="e.g. States of Matter" />
             </div>
           </div>
         </div>
 
-        <!-- Section 3: Standards -->
+        <!-- Section 3 -->
         <div class="form-section">
           <div class="section-title">🎯 Learning Standards</div>
           <div class="section-desc">Define what learners should know and be able to do.</div>
-
           <div class="form-group" style="margin-bottom:1rem">
             <label>Content Standard <span class="req">*</span></label>
             <textarea id="contentStd" rows="3" placeholder="e.g. Demonstrate understanding of the properties and classification of matter…" oninput="updateCompleteness()"></textarea>
           </div>
-
           <div class="form-group" style="margin-bottom:1rem">
             <label>Performance Indicator <span class="req">*</span></label>
             <textarea id="perfInd" rows="3" placeholder="e.g. Learners can identify and describe the three states of matter with examples…" oninput="updateCompleteness()"></textarea>
           </div>
-
           <div class="form-group">
             <label>Core Competencies</label>
-            <input type="text" placeholder="e.g. Critical Thinking, Collaboration, Communication" />
+            <input type="text" id="coreComp" placeholder="e.g. Critical Thinking, Collaboration, Communication" />
           </div>
         </div>
 
-        <!-- Section 4: Lesson Phases -->
+        <!-- Section 4 -->
         <div class="form-section">
           <div class="section-title">🔄 Lesson Phases</div>
           <div class="section-desc">Structure your lesson across three phases.</div>
@@ -779,11 +504,11 @@
             <div class="phase-body">
               <div class="form-group" style="margin-bottom:0.7rem">
                 <label>Activities</label>
-                <textarea id="phase1" rows="4" placeholder="e.g. Ask learners: 'What happens to ice when left in the sun?' Brainstorm responses on the board…" oninput="updateCompleteness()"></textarea>
+                <textarea id="phase1" rows="4" placeholder="e.g. Ask learners: 'What happens to ice when left in the sun?'…" oninput="updateCompleteness()"></textarea>
               </div>
               <div class="form-group">
                 <label>Resources / TLMs</label>
-                <input type="text" placeholder="e.g. Ice cubes, pictures of water in different states" />
+                <input type="text" id="res1" placeholder="e.g. Ice cubes, pictures of water in different states" />
               </div>
             </div>
           </div>
@@ -797,11 +522,11 @@
             <div class="phase-body">
               <div class="form-group" style="margin-bottom:0.7rem">
                 <label>Activities</label>
-                <textarea id="phase2" rows="5" placeholder="e.g. Teacher demonstrates the three states using real examples. Learners work in groups to classify materials…" oninput="updateCompleteness()"></textarea>
+                <textarea id="phase2" rows="5" placeholder="e.g. Teacher demonstrates the three states using real examples…" oninput="updateCompleteness()"></textarea>
               </div>
               <div class="form-group">
                 <label>Resources / TLMs</label>
-                <input type="text" placeholder="e.g. Boiling flask, thermometer, worksheet" />
+                <input type="text" id="res2" placeholder="e.g. Boiling flask, thermometer, worksheet" />
               </div>
             </div>
           </div>
@@ -815,34 +540,33 @@
             <div class="phase-body">
               <div class="form-group" style="margin-bottom:0.7rem">
                 <label>Activities</label>
-                <textarea id="phase3" rows="4" placeholder="e.g. Exit ticket — learners write one example of each state of matter. Whole-class review…" oninput="updateCompleteness()"></textarea>
+                <textarea id="phase3" rows="4" placeholder="e.g. Exit ticket — learners write one example of each state of matter…" oninput="updateCompleteness()"></textarea>
               </div>
               <div class="form-group">
                 <label>Assessment Method</label>
-                <input type="text" placeholder="e.g. Oral questioning, exit ticket, observation" />
+                <input type="text" id="assessment" placeholder="e.g. Oral questioning, exit ticket, observation" />
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Section 5: Additional -->
+        <!-- Section 5 -->
         <div class="form-section">
           <div class="section-title">📎 Additional Notes</div>
           <div class="section-desc">Homework, remarks, or follow-up activities.</div>
           <div class="form-group" style="margin-bottom:1rem">
             <label>Homework / Extension Activity</label>
-            <textarea rows="3" placeholder="e.g. Draw and label diagrams showing the arrangement of particles in each state of matter…"></textarea>
+            <textarea id="homework" rows="3" placeholder="e.g. Draw and label diagrams showing the arrangement of particles…"></textarea>
           </div>
           <div class="form-group">
             <label>Teacher's Remarks</label>
-            <textarea rows="2" placeholder="Optional remarks to yourself after the lesson…"></textarea>
+            <textarea id="remarks" rows="2" placeholder="Optional remarks to yourself after the lesson…"></textarea>
           </div>
         </div>
 
-        <!-- FORM ACTIONS -->
         <div class="form-actions">
           <button class="btn-outline" onclick="saveDraft()">💾 Save as Draft</button>
-          <button class="btn-primary" onclick="saveNote()">✅ Save Lesson Note</button>
+          <button class="btn-primary" id="submitBtn2" onclick="submitNote()">✅ Submit Lesson Note</button>
         </div>
 
       </div><!-- /form-card -->
@@ -850,95 +574,33 @@
       <!-- SIDE PANEL -->
       <div class="side-panel">
 
-        <!-- Completeness -->
         <div class="panel-card">
           <div class="panel-head">📊 Completeness</div>
           <div class="panel-body">
-            <div class="completeness-value" id="pctValue">30%</div>
+            <div class="completeness-value" id="pctValue">0%</div>
             <div class="completeness-label">Fields completed</div>
-            <div class="c-bar-wrap">
-              <div class="c-bar-fill" id="cBar"></div>
-            </div>
+            <div class="c-bar-wrap"><div class="c-bar-fill" id="cBar"></div></div>
             <div class="checklist">
-              <div class="check-item done" id="chk-subject">
-                <span class="check-icon">✅</span> Subject selected
-              </div>
-              <div class="check-item done" id="chk-class">
-                <span class="check-icon">✅</span> Class selected
-              </div>
-              <div class="check-item" id="chk-strand">
-                <span class="check-icon">⬜</span> Strand entered
-              </div>
-              <div class="check-item" id="chk-substrand">
-                <span class="check-icon">⬜</span> Sub-strand entered
-              </div>
-              <div class="check-item" id="chk-content">
-                <span class="check-icon">⬜</span> Content standard
-              </div>
-              <div class="check-item" id="chk-perf">
-                <span class="check-icon">⬜</span> Performance indicator
-              </div>
-              <div class="check-item" id="chk-phase1">
-                <span class="check-icon">⬜</span> Phase 1 — Starter
-              </div>
-              <div class="check-item" id="chk-phase2">
-                <span class="check-icon">⬜</span> Phase 2 — Main
-              </div>
-              <div class="check-item" id="chk-phase3">
-                <span class="check-icon">⬜</span> Phase 3 — Plenary
-              </div>
+              <div class="check-item" id="chk-subject"><span class="check-icon">⬜</span> Subject selected</div>
+              <div class="check-item" id="chk-class"><span class="check-icon">⬜</span> Class selected</div>
+              <div class="check-item" id="chk-strand"><span class="check-icon">⬜</span> Strand entered</div>
+              <div class="check-item" id="chk-substrand"><span class="check-icon">⬜</span> Sub-strand entered</div>
+              <div class="check-item" id="chk-content"><span class="check-icon">⬜</span> Content standard</div>
+              <div class="check-item" id="chk-perf"><span class="check-icon">⬜</span> Performance indicator</div>
+              <div class="check-item" id="chk-phase1"><span class="check-icon">⬜</span> Phase 1 — Starter</div>
+              <div class="check-item" id="chk-phase2"><span class="check-icon">⬜</span> Phase 2 — Main</div>
+              <div class="check-item" id="chk-phase3"><span class="check-icon">⬜</span> Phase 3 — Plenary</div>
             </div>
           </div>
         </div>
 
-        <!-- Tips -->
         <div class="panel-card">
           <div class="panel-head">💡 Tips</div>
           <div class="panel-body">
-            <div class="tip-item">
-              <span class="tip-icon">🎯</span>
-              Write performance indicators in learner-centred language — "Learners can…"
-            </div>
-            <div class="tip-item">
-              <span class="tip-icon">⏱️</span>
-              Keep Phase 1 brief (5–10 min). Use it to activate prior knowledge.
-            </div>
-            <div class="tip-item">
-              <span class="tip-icon">🤝</span>
-              Include at least one group or collaborative activity in Phase 2.
-            </div>
-            <div class="tip-item">
-              <span class="tip-icon">📝</span>
-              Use exit tickets in Phase 3 to assess understanding before dismissal.
-            </div>
-          </div>
-        </div>
-
-        <!-- Recent Notes -->
-        <div class="panel-card">
-          <div class="panel-head">🗂️ Recent Notes</div>
-          <div class="panel-body" style="padding:0.5rem 0;">
-            <a href="#" style="display:flex;gap:0.6rem;align-items:center;padding:0.7rem 1.2rem;text-decoration:none;border-bottom:1px solid var(--border);transition:background 0.15s;" onmouseover="this.style.background='var(--cream)'" onmouseout="this.style.background=''">
-              <span style="font-size:1rem;">📋</span>
-              <div>
-                <div style="font-size:0.82rem;font-weight:500;color:var(--text-dark);">Properties of Matter</div>
-                <div style="font-size:0.72rem;color:var(--text-muted);">Basic Science · Week 7</div>
-              </div>
-            </a>
-            <a href="#" style="display:flex;gap:0.6rem;align-items:center;padding:0.7rem 1.2rem;text-decoration:none;border-bottom:1px solid var(--border);transition:background 0.15s;" onmouseover="this.style.background='var(--cream)'" onmouseout="this.style.background=''">
-              <span style="font-size:1rem;">📋</span>
-              <div>
-                <div style="font-size:0.82rem;font-weight:500;color:var(--text-dark);">Ghana's Independence</div>
-                <div style="font-size:0.72rem;color:var(--text-muted);">Social Studies · Week 6</div>
-              </div>
-            </a>
-            <a href="#" style="display:flex;gap:0.6rem;align-items:center;padding:0.7rem 1.2rem;text-decoration:none;transition:background 0.15s;" onmouseover="this.style.background='var(--cream)'" onmouseout="this.style.background=''">
-              <span style="font-size:1rem;">📋</span>
-              <div>
-                <div style="font-size:0.82rem;font-weight:500;color:var(--text-dark);">Linear Equations</div>
-                <div style="font-size:0.72rem;color:var(--text-muted);">Mathematics · Week 6</div>
-              </div>
-            </a>
+            <div class="tip-item"><span class="tip-icon">🎯</span>Write performance indicators in learner-centred language — "Learners can…"</div>
+            <div class="tip-item"><span class="tip-icon">⏱️</span>Keep Phase 1 brief (5–10 min). Use it to activate prior knowledge.</div>
+            <div class="tip-item"><span class="tip-icon">🤝</span>Include at least one group or collaborative activity in Phase 2.</div>
+            <div class="tip-item"><span class="tip-icon">📝</span>Use exit tickets in Phase 3 to assess understanding before dismissal.</div>
           </div>
         </div>
 
@@ -949,57 +611,209 @@
   </main>
 
   <!-- TOAST -->
-  <div class="toast" id="toast">✅ Lesson note saved successfully!</div>
+  <div class="toast" id="toast">✅ Lesson note saved!</div>
 
-  <script>
-    // Completeness tracker
-    const fields = {
-      'subject':   'chk-subject',
-      'class':     'chk-class',
-      'strand':    'chk-strand',
-      'substrand': 'chk-substrand',
-      'contentStd':'chk-content',
-      'perfInd':   'chk-perf',
-      'phase1':    'chk-phase1',
-      'phase2':    'chk-phase2',
-      'phase3':    'chk-phase3',
+  <!-- SUCCESS OVERLAY -->
+  <div class="submit-overlay" id="submitOverlay">
+    <div class="submit-box">
+      <div class="submit-icon">🎉</div>
+      <h3>Lesson Note Submitted!</h3>
+      <p>Your lesson note has been saved and the supervisor has been notified at <strong>kgio9491@gmail.com</strong>.</p>
+      <button class="btn-primary" onclick="closeOverlay()">← Back to Dashboard</button>
+    </div>
+  </div>
+
+  <!-- FIREBASE -->
+  <script type="module">
+    import { initializeApp }                         from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut }  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey:            "AIzaSyAG8GrM28pha1Am5JvFkOK9lEM6CJAyC5o",
+      authDomain:        "smartlesson-notes.firebaseapp.com",
+      projectId:         "smartlesson-notes",
+      storageBucket:     "smartlesson-notes.firebasestorage.app",
+      messagingSenderId: "432615767334",
+      appId:             "1:432615767334:web:773c2c46c54b73f3bbf5e7",
+      measurementId:     "G-XNNKMJNWCT"
     };
 
-    function updateCompleteness() {
+    const app  = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db   = getFirestore(app);
+
+    // ── Auth guard: redirect to login if not signed in ──
+    let currentUser = null;
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        window.location.href = "login.html";
+      } else {
+        currentUser = user;
+        // Show teacher email in sidebar
+        document.getElementById("teacherEmail").textContent = user.email;
+        const initials = user.email.substring(0, 2).toUpperCase();
+        document.getElementById("teacherAvatar").textContent = initials;
+        document.getElementById("teacherName").textContent = user.displayName || user.email.split("@")[0];
+      }
+    });
+
+    // ── Logout ──
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
+      await signOut(auth);
+      window.location.href = "login.html";
+    });
+
+    // ── Submit lesson note ──
+    window.submitNote = async function() {
+      if (!currentUser) { showToast("⚠️ Not signed in!", true); return; }
+
+      // Collect all field values
+      const note = {
+        teacherEmail: currentUser.email,
+        teacherName:  currentUser.displayName || currentUser.email.split("@")[0],
+        subject:      document.getElementById("subject").value,
+        className:    document.getElementById("class").value,
+        term:         document.getElementById("term").value,
+        week:         document.getElementById("week").value,
+        weekEnding:   document.getElementById("weekEnding").value,
+        duration:     document.getElementById("duration").value,
+        learners:     document.getElementById("learners").value,
+        strand:       document.getElementById("strand").value,
+        substrand:    document.getElementById("substrand").value,
+        topic:        document.getElementById("topic").value,
+        contentStd:   document.getElementById("contentStd").value,
+        perfInd:      document.getElementById("perfInd").value,
+        coreComp:     document.getElementById("coreComp").value,
+        phase1:       document.getElementById("phase1").value,
+        res1:         document.getElementById("res1").value,
+        phase2:       document.getElementById("phase2").value,
+        res2:         document.getElementById("res2").value,
+        phase3:       document.getElementById("phase3").value,
+        assessment:   document.getElementById("assessment").value,
+        homework:     document.getElementById("homework").value,
+        remarks:      document.getElementById("remarks").value,
+        status:       "submitted",
+        submittedAt:  serverTimestamp()
+      };
+
+      // Validate required fields
+      if (!note.subject || !note.className || !note.strand || !note.substrand || !note.contentStd || !note.perfInd) {
+        showToast("⚠️ Please fill in all required fields first!", true);
+        return;
+      }
+
+      // Disable buttons while saving
+      document.getElementById("submitBtn").disabled  = true;
+      document.getElementById("submitBtn2").disabled = true;
+
+      try {
+        // 1. Save to Firestore
+        await addDoc(collection(db, "lessonNotes"), note);
+
+        // 2. Send email notification via EmailJS
+        await sendEmailNotification(note);
+
+        // 3. Show success overlay
+        document.getElementById("submitOverlay").classList.add("show");
+
+      } catch (err) {
+        console.error(err);
+        showToast("❌ Error submitting. Please try again.", true);
+        document.getElementById("submitBtn").disabled  = false;
+        document.getElementById("submitBtn2").disabled = false;
+      }
+    };
+
+    // ── Send email via EmailJS ──
+    async function sendEmailNotification(note) {
+      // Load EmailJS
+      await loadScript("https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js");
+
+      emailjs.init("YOUR_EMAILJS_PUBLIC_KEY"); // ← replace with your EmailJS public key
+
+      return emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+        to_email:      "kgio9491@gmail.com",
+        teacher_email: note.teacherEmail,
+        teacher_name:  note.teacherName,
+        subject:       note.subject,
+        class_name:    note.className,
+        term:          note.term,
+        week:          note.week,
+        topic:         note.topic,
+        strand:        note.strand,
+        substrand:     note.substrand,
+        content_std:   note.contentStd,
+        perf_ind:      note.perfInd,
+        phase1:        note.phase1,
+        phase2:        note.phase2,
+        phase3:        note.phase3,
+        submitted_at:  new Date().toLocaleString()
+      });
+    }
+
+    function loadScript(src) {
+      return new Promise((resolve, reject) => {
+        if (document.querySelector(`script[src="${src}"]`)) { resolve(); return; }
+        const s = document.createElement("script");
+        s.src = src; s.onload = resolve; s.onerror = reject;
+        document.head.appendChild(s);
+      });
+    }
+
+    window.closeOverlay = function() {
+      window.location.href = "dashboard.html";
+    };
+
+    window.saveDraft = function() {
+      showToast("💾 Draft saved locally!");
+    };
+
+    function showToast(msg, isError = false) {
+      const t = document.getElementById("toast");
+      t.textContent = msg;
+      t.classList.toggle("error-toast", isError);
+      t.classList.add("show");
+      setTimeout(() => t.classList.remove("show"), 3500);
+    }
+
+    window.showToast = showToast;
+
+    // ── Completeness tracker ──
+    const fields = {
+      'subject':    'chk-subject',
+      'class':      'chk-class',
+      'strand':     'chk-strand',
+      'substrand':  'chk-substrand',
+      'contentStd': 'chk-content',
+      'perfInd':    'chk-perf',
+      'phase1':     'chk-phase1',
+      'phase2':     'chk-phase2',
+      'phase3':     'chk-phase3',
+    };
+
+    window.updateCompleteness = function() {
       let done = 0;
       const total = Object.keys(fields).length;
-
       for (const [id, chkId] of Object.entries(fields)) {
-        const el = document.getElementById(id);
+        const el  = document.getElementById(id);
         const chk = document.getElementById(chkId);
         const filled = el && el.value.trim().length > 0;
         if (filled) {
           done++;
-          chk.classList.add('done');
-          chk.querySelector('.check-icon').textContent = '✅';
+          chk.classList.add("done");
+          chk.querySelector(".check-icon").textContent = "✅";
         } else {
-          chk.classList.remove('done');
-          chk.querySelector('.check-icon').textContent = '⬜';
+          chk.classList.remove("done");
+          chk.querySelector(".check-icon").textContent = "⬜";
         }
       }
-
       const pct = Math.round((done / total) * 100);
-      document.getElementById('pctValue').textContent = pct + '%';
-      document.getElementById('cBar').style.width = pct + '%';
-    }
+      document.getElementById("pctValue").textContent = pct + "%";
+      document.getElementById("cBar").style.width = pct + "%";
+    };
 
-    function showToast(msg) {
-      const t = document.getElementById('toast');
-      t.textContent = msg;
-      t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), 3000);
-    }
-
-    function saveNote()  { showToast('✅ Lesson note saved successfully!'); }
-    function saveDraft() { showToast('💾 Draft saved!'); }
-
-    // init
-    updateCompleteness();
+    window.updateCompleteness();
   </script>
 
 </body>
