@@ -685,7 +685,8 @@
 
       try {
         // Send to Make.com webhook (triggers email to supervisor)
-        await fetch("https://hook.eu1.make.com/kdh84ne3vptmkykhrbh2twou8fewugd7", {
+        fetch("https://hook.eu1.make.com/kdh84ne3vptmkykhrbh2twou8fewugd7", {
+          mode: "no-cors",
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
